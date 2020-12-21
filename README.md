@@ -3,3 +3,7 @@
 </p>
 
 Welcome to the blog of the [Machine Translation group](https://mt.cs.upc.edu) at [Universitat Politècnica de Catalunya](https://upc.edu/en).
+
+# Posts
+
+1 - [The Transformer: fairseq edition](./1_TheTransformer_JavierFerrando.md) by [Javier Ferrando](https://github.com/javiferran)
