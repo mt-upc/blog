@@ -58,7 +58,7 @@ From now on, let's consider <!-- $$ X^L $$ --> <img style="background: white;" s
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/operations.png?raw=true" width="45%" align="center"/>
 </p>
 
-Note that although <!-- $$ X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL"> is represented in fairseq as a tensor of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, for the shake of simplicity, we take <code class="language-plaintext highlighter-rouge">batch=1</code> in the upcoming mathematical notation and just consider it as a <code class="language-plaintext highlighter-rouge">src_len x encoder_embed_dim</code> matrix.
+Note that although <!-- $$ X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL"> is represented in fairseq as a tensor of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, for the sake of simplicity, we take <code class="language-plaintext highlighter-rouge">batch=1</code> in the upcoming mathematical notation and just consider it as a <code class="language-plaintext highlighter-rouge">src_len x encoder_embed_dim</code> matrix.
 
 
 <!-- $$
@@ -121,7 +121,7 @@ This returns a NamedTuple object <code class="language-plaintext highlighter-rou
 
 ### Encoder Layer
 
-The previous snipped of code shows a loop over the layers of the Encoder block, <code class="language-plaintext highlighter-rouge">for layer in self.layers</code>. This layer is implemented in fairseq in <code class="language-plaintext highlighter-rouge">class TransformerEncoderLayer(nn.Module)</code> inside [fairseq/modules/transformer_layer.py](https://github.com/pytorch/fairseq/blob/master/fairseq/modules/transformer_layer.py) and computes the following operations:
+The previous snippet of code shows a loop over the layers of the Encoder block, <code class="language-plaintext highlighter-rouge">for layer in self.layers</code>. This layer is implemented in fairseq in <code class="language-plaintext highlighter-rouge">class TransformerEncoderLayer(nn.Module)</code> inside [fairseq/modules/transformer_layer.py](https://github.com/pytorch/fairseq/blob/master/fairseq/modules/transformer_layer.py) and computes the following operations:
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/encoder.png?raw=true" width="25%" align="center"/>
@@ -229,7 +229,7 @@ $$ -->
 
 Given a token in the input, <!-- $$ i \in X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i%20%5Cin%20X%5EL">, it is passed to the self-attention function. Then, by means of dot products, scalar values (scores) are obtained between the query vector <!-- $$ q_{i} = iW^Q $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q_%7Bi%7D%20%3D%20iW%5EQ"> and every key vector of the input sequence <!-- $$ k_{j} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=k_%7Bj%7D">. The intuition is that this performs a similarity operation, similar queries and keys vectors will yield higher scores.
 
-This scores represents how much attention is paid by the self-attention layer to other parts of the sequence when encoding <!-- $$ i $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i">. By multiplying <!-- $$ q_{i} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q_%7Bi%7D"> by the matrix <!-- $$ K^{T} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K%5E%7BT%7D">, a list of <code class="language-plaintext highlighter-rouge">src_len</code> scores is output. The scores are then passed through a softmax function giving bounded values:
+These scores represent how much attention is paid by the self-attention layer to other parts of the sequence when encoding <!-- $$ i $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i">. By multiplying <!-- $$ q_{i} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q_%7Bi%7D"> by the matrix <!-- $$ K^{T} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K%5E%7BT%7D">, a list of <code class="language-plaintext highlighter-rouge">src_len</code> scores is output. The scores are then passed through a softmax function giving bounded values:
 
 
 <!-- $$
@@ -310,7 +310,7 @@ The goal of the decoder is to generate a sequence <!-- $$ \mathcal{Y} $$ --> <im
 
 The encoder output <code class="language-plaintext highlighter-rouge">encoder_out.encoder_out</code> is used by the decoder (in each layer) together with <!-- $$ \mathcal{Y}<t=(output_{0},...,output_{t-1}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BY%7D%3Ct%3D(output_%7B0%7D%2C...%2Coutput_%7Bt-1%7D)"> (<code class="language-plaintext highlighter-rouge">prev_output_tokens</code>) to generate one feature vector per target token at each time step (<code class="language-plaintext highlighter-rouge">tgt_len = 1</code> in each forward pass). This feature vector is then transformed by a linear layer and passed through a softmax layer <code class="language-plaintext highlighter-rouge">self.output_layer(x)</code> to get a probability distribution over the target language vocabulary.
 
-Following the beam search algorithm, top <code class="language-plaintext highlighter-rouge">beam</code> hypothesis are chosen and inserted in the batch dimension input of the decoder (<code class="language-plaintext highlighter-rouge">prev_output_tokens</code>) for the next time step.
+Following the beam search algorithm, top <code class="language-plaintext highlighter-rouge">beam</code> hypotheses are chosen and inserted in the batch dimension input of the decoder (<code class="language-plaintext highlighter-rouge">prev_output_tokens</code>) for the next time step.
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/decoder.png?raw=true" width="35%" align="center"/>
@@ -433,13 +433,13 @@ def extract_features_scriptable(
 
 ### Decoder layer
 
-The previous snipped of code shows a loop over the layers of the Decoder block <code class="language-plaintext highlighter-rouge">for idx, layer in enumerate(self.layers):</code>. This layer is implemented in fairseq in <code class="language-plaintext highlighter-rouge">class TransformerDecoderLayer(nn.Module)</code> inside [fairseq/modules/transformer_layer.py](https://github.com/pytorch/fairseq/blob/master/fairseq/modules/transformer_layer.py) and computes the following operations:
+The previous snippet of code shows a loop over the layers of the Decoder block <code class="language-plaintext highlighter-rouge">for idx, layer in enumerate(self.layers):</code>. This layer is implemented in fairseq in <code class="language-plaintext highlighter-rouge">class TransformerDecoderLayer(nn.Module)</code> inside [fairseq/modules/transformer_layer.py](https://github.com/pytorch/fairseq/blob/master/fairseq/modules/transformer_layer.py) and computes the following operations:
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/incremental_decoding.png?raw=true" width="40%" align="center"/>
 </p>
 
-In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer (Encoder-Decoder Attention), which performs multi-head attention over the output of the encoder stack as input for <!-- $$ W^{K} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BK%7D"> and <!-- $$ W^{V} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BV%7D"> and the ouput of the sprevious module <!-- $$ attn_{t}* $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn_%7Bt%7D*">.  Similar to the encoder, it employs residual connections around each of the sub-layers, followed by layer normalization.
+In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer (Encoder-Decoder Attention), which performs multi-head attention over the output of the encoder stack as input for <!-- $$ W^{K} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BK%7D"> and <!-- $$ W^{V} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BV%7D"> and the ouput of the previous module <!-- $$ attn_{t}* $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn_%7Bt%7D*">.  Similar to the encoder, it employs residual connections around each of the sub-layers, followed by layer normalization.
 
 
 ```python
@@ -555,7 +555,7 @@ Flashing back to ([fairseq/modules/multihead_attention.py](https://github.com/py
 
 The Encoder-Decoder attention receives key and values from the encoder output <code class="language-plaintext highlighter-rouge">encoder_out.encoder_out</code> and the query from the previous module <!-- $$ attn_{t}* $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn_%7Bt%7D*">. Here, <!-- $$ q_{t} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q_%7Bt%7D"> is compared against every key vector received from the encoder (and transformed by <!-- $$ W^K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5EK">).
 
-As before, <!-- $$ K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K"> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V"> don't need to be recomputed every time step since they are constant for the whole decoding process. Encoder-Decoder attention uses <code class="language-plaintext highlighter-rouge">static_kv=True</code> so that there is no need to update the <code class="language-plaintext highlighter-rouge">incremental_state</code> (see previous code snipped).
+As before, <!-- $$ K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K"> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V"> don't need to be recomputed every time step since they are constant for the whole decoding process. Encoder-Decoder attention uses <code class="language-plaintext highlighter-rouge">static_kv=True</code> so that there is no need to update the <code class="language-plaintext highlighter-rouge">incremental_state</code> (see previous code snippet).
 
 Now, just one vector <!-- $$ z_{t} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%7Bt%7D"> is generated at each time step by each head as a weighted average of the <!-- $$ v $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=v"> vectors.
 
