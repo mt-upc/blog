@@ -7,7 +7,7 @@ The blog is inspired by [The annotated Transformer](https://nlp.seas.harvard.edu
 
 ## Model Architecture
 
-The Transformer is based on a stack of encoders and another stack of decoders. The encoder maps an input sequence of tokens <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Cmathcal%7BX%7D%3D%28token_%7B0%7D%2C...%2Ctoken_%7Bsrc%5C_len%7D%29" title="\mathcal{X}=(token_{0},...,token_{src\_len})" vertical-align="text-bottom"/> to a sequence of continuous vector representations <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20encoder%5C_out%20%3D%20%28encoder%5C_out_0%2C...%2C%20encoder%5C_out_%7Bsrc%5C_len%7D%29" title="encoder\_out = (encoder\_out_0,..., encoder\_out_{src\_len})" style="vertical-align:middle"/>. Given <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20encoder%5C_out" title="encoder\_out" style="vertical-align:middle"/>, the decoder then generates an output sequence <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Cmathcal%7BY%7D%20%3D%20%28output_0%2C...%2Coutput_%7BT%7D%29" title="\mathcal{Y} = (output_0,...,output_{T})" style="vertical-align:middle"/> of symbols one element at a time. At each step the model is auto-regressive, consuming the previously generated symbols as additional input when generating the next token.
+The Transformer is based on a stack of encoders and another stack of decoders. The encoder maps an input sequence of tokens <!-- $$ \mathcal{X}=(token_{0},...,token_{src\_len}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BX%7D%3D(token_%7B0%7D%2C...%2Ctoken_%7Bsrc%5C_len%7D)"> to a sequence of continuous vector representations <!-- $$ encoder\_out = (encoder\_out_0,..., encoder\_out_{src\_len}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=encoder%5C_out%20%3D%20(encoder%5C_out_0%2C...%2C%20encoder%5C_out_%7Bsrc%5C_len%7D)">. Given <!-- $$ encoder\_out $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=encoder%5C_out">, the decoder then generates an output sequence <!-- $$ \mathcal{Y} = (output_0,...,output_{T}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BY%7D%20%3D%20(output_0%2C...%2Coutput_%7BT%7D)"> of symbols one element at a time. At each step the model is auto-regressive, consuming the previously generated symbols as additional input when generating the next token.
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/transformer.png?raw=true" width="50%" align="center"/>
@@ -48,23 +48,29 @@ class TransformerModel(FairseqEncoderDecoderModel):
 
 ## Encoder
 
-The encoder (<code class="language-plaintext highlighter-rouge">TransformerEncoder</code>) is composed of a stack of <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20N%3Dencoder%5C_layers" title="N=encoder\_layers" style="vertical-align:middle"/> identical layers.
+The encoder (<code class="language-plaintext highlighter-rouge">TransformerEncoder</code>) is composed of a stack of <!-- $$ N=encoder\_layers $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=N%3Dencoder%5C_layers"> identical layers.
 
-The encoder recieves a list of tokens <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Cmathcal%7BX%7D%3D" title="\mathcal{X}=" style="vertical-align:middle"/><code class="language-plaintext highlighter-rouge">src_tokens</code><img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%3D%28token_%7B0%7D%2C...%2Ctoken_%7Bsrc%5C_len%7D%29" title="=(token_{0},...,token_{src\_len})" style="vertical-align:middle"/> which are then converted to continuous vector representions <code class="language-plaintext highlighter-rouge">x = self.forward_embedding(src_tokens, token_embeddings)</code>, which is made of the sum of the (scaled) embedding lookup and the positional embedding: <code class="language-plaintext highlighter-rouge">x = self.embed_scale * self.embed_tokens(src_tokens) + self.embed_positions(src_tokens)</code>.
+The encoder recieves a list of tokens <!-- $$ \mathcal{X}= $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BX%7D%3D"><code class="language-plaintext highlighter-rouge">src_tokens</code><!-- $$ =(token_{0},...,token_{src\_len}) $$ --><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%3D(token_%7B0%7D%2C...%2Ctoken_%7Bsrc%5C_len%7D)">  which are then converted to continuous vector representions <code class="language-plaintext highlighter-rouge">x = self.forward_embedding(src_tokens, token_embeddings)</code>, which is made of the sum of the (scaled) embedding lookup and the positional embedding: <code class="language-plaintext highlighter-rouge">x = self.embed_scale * self.embed_tokens(src_tokens) + self.embed_positions(src_tokens)</code>.
 
-From now on, let's consider <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20X%5EL" title="X^L" style="vertical-align:middle"/> as the <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20L" title="L" style="vertical-align:middle"/> encoder layer input sequence. <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20X%5E%7B1%7D" title="X^{1}" style="vertical-align:middle"/> refers then to the vectors representation of the input sequence tokens of the first layer, after computing <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> on <code class="language-plaintext highlighter-rouge">src_tokens</code>.
+From now on, let's consider <!-- $$ X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL"> as the <!-- $$ L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=L"> encoder layer input sequence. <!-- $$ X^{1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5E%7B1%7D"> refers then to the vectors representation of the input sequence tokens of the first layer, after computing <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> on <code class="language-plaintext highlighter-rouge">src_tokens</code>.
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/operations.png?raw=true" width="45%" align="center"/>
 </p>
 
-Note that although <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20X%5EL" title="X^L" style="vertical-align:middle"/> is represented in fairseq as a tensor of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, for the shake of simplicity, we take <code class="language-plaintext highlighter-rouge">batch=1</code> in the upcoming mathematical notation and just consider it as a <code class="language-plaintext highlighter-rouge">src_len x encoder_embed_dim</code> matrix.
+Note that although <!-- $$ X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL"> is represented in fairseq as a tensor of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, for the shake of simplicity, we take <code class="language-plaintext highlighter-rouge">batch=1</code> in the upcoming mathematical notation and just consider it as a <code class="language-plaintext highlighter-rouge">src_len x encoder_embed_dim</code> matrix.
 
 <p align="center">
-<img src="https://latex.codecogs.com/svg.latex?\inline&space;X^L&space;=&space;\begin{bmatrix}&space;x_{0}\\&space;\vdots\\&space;x_{src\_len}&space;\end{bmatrix}" title="X^L = \begin{bmatrix} x_{0}\\ \vdots\\ x_{src\_len} \end{bmatrix}" style="vertical-align:middle"/>
+
+<!-- $$
+X^L = \begin{bmatrix} x_{0}\\ \vdots\\ x_{src\_len} \end{bmatrix}
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL%20%3D%20%5Cbegin%7Bbmatrix%7D%20x_%7B0%7D%5C%5C%20%5Cvdots%5C%5C%20x_%7Bsrc%5C_len%7D%20%5Cend%7Bbmatrix%7D"></div>
+
 </p>
 
-Where <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20x_%7Bi%7D%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bencoder%5C_embed%5C_dim%7D" title="x_{i} \in \mathbb{R}^{encoder\_embed\_dim}" style="vertical-align:middle"/>.
+Where <!-- $$ x_{i} \in \mathbb{R}^{encoder\_embed\_dim} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=x_%7Bi%7D%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bencoder%5C_embed%5C_dim%7D">.
 
 
 ```python
@@ -111,7 +117,7 @@ class TransformerEncoder(FairseqEncoder):
 
 This returns a NamedTuple object <code class="language-plaintext highlighter-rouge">encoder_out</code>.
 
-* encoder_out: of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, the last layer encoder's embedding which, as we will see, is used by the Decoder. Note that is the same as <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20X%5E%7BN&plus;1%7D" title="X^{N+1}" style="vertical-align:middle"/> when <code class="language-plaintext highlighter-rouge">batch=1</code>.
+* encoder_out: of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, the last layer encoder's embedding which, as we will see, is used by the Decoder. Note that is the same as <!-- $$ X^{N+1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5E%7BN%2B1%7D"> when <code class="language-plaintext highlighter-rouge">batch=1</code>.
 * encoder_padding_mask: of shape <code class="language-plaintext highlighter-rouge">batch x src_len</code>. Binary ByteTensor where padding elements are indicated by 1.
 * encoder_embedding: of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, the words (scaled) embedding lookup.
 * encoder_states: of shape <code class="language-plaintext highlighter-rouge">list[src_len x batch x encoder_embed_dim]</code>, intermediate enocoder layer's output.
@@ -154,7 +160,13 @@ class TransformerEncoderLayer(nn.Module):
 Then, the result is passed through a position-wise feed-forward network composed by two fully connected layers, <code class="language-plaintext highlighter-rouge">fc1</code> and <code class="language-plaintext highlighter-rouge">fc2</code> with a ReLU activation in between (<code class="language-plaintext highlighter-rouge">self.activation_fn(self.fc1(x))</code>) and dropout <code class="language-plaintext highlighter-rouge">self.dropout_module(x)</code>.
 
 <p align="center">
-<img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Ctext%7BFeed%20Forward%7D%28x%29%3D%5Cmax%280%2C%20xW_1%20&plus;%20b_1%29%20W_2%20&plus;%20b_2" title="\text{Feed Forward}(x)=\max(0, xW_1 + b_1) W_2 + b_2" style="vertical-align:middle"/>
+
+<!-- $$
+\text{Feed Forward}(x)=\max(0, xW_1 + b_1) W_2 + b_2
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BFeed%20Forward%7D(x)%3D%5Cmax(0%2C%20xW_1%20%2B%20b_1)%20W_2%20%2B%20b_2"></div>
+
 </p>
 
 
@@ -204,7 +216,7 @@ class MultiheadAttention(nn.Module):
     ) -> Tuple[Tensor, Optional[Tensor]]:
 ```
 
-Each encoder layer input <img src="https://latex.codecogs.com/svg.latex?\inline&space;X^L" title="X^L" style="vertical-align:middle"/></a>, shown as <code class="language-plaintext highlighter-rouge">query</code> below since three identical copies are passed to the self-attention module, is multiplied by three weight matrices learned during the training process: <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20W%5E%7BQ%7D%2C%20W%5E%7BK%7D" title="W^{Q}, W^{K}" style="vertical-align:middle"/> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20W%5E%7BV%7D" title="W^{V}" style="vertical-align:middle"/>, obtaining <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20Q%2C%20K" title="Q, K" style="vertical-align:middle"/> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20V" title="V" style="vertical-align:middle"/>. Each row of this output matrices represents the query, key and value vectors of each token in the sequence, represented as <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20q%2C%20k" title="q, k" style="vertical-align:middle"/> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20v" title="v" style="vertical-align:middle"/> in the formulas that follow.
+Each encoder layer input <!-- $$ X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL">, shown as <code class="language-plaintext highlighter-rouge">query</code> below since three identical copies are passed to the self-attention module, is multiplied by three weight matrices learned during the training process: <!-- $$ W^{Q}, W^{K} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BQ%7D%2C%20W%5E%7BK%7D"> and <!-- $$ W^{V} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BV%7D">, obtaining <!-- $$ Q, K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=Q%2C%20K"> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V">. Each row of this output matrices represents the query, key and value vectors of each token in the sequence, represented as <!-- $$ q, k $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q%2C%20k"> and <!-- $$ v $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=v"> in the formulas that follow.
 
 
 ```python
@@ -217,21 +229,28 @@ Each encoder layer input <img src="https://latex.codecogs.com/svg.latex?\inline&
 
 The self-attention module does the following operation:
 
-<p align="center">
-<img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Cmathrm%7Bsoftmax%7D%28%5Cfrac%7BQK%5E%5Ctop%7D%7B%5Csqrt%7Bd_%7Bk%7D%7D%7D%29V" title="\mathrm{softmax}(\frac{QK^\top}{\sqrt{d_{k}}})V" style="vertical-align:middle"/></a>
-</p>
+<!-- $$
+\mathrm{softmax}(\frac{QK^\top}{\sqrt{d_{k}}})V
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bsoftmax%7D(%5Cfrac%7BQK%5E%5Ctop%7D%7B%5Csqrt%7Bd_%7Bk%7D%7D%7D)V"></div>
 
 ```python
     attn_weights = torch.bmm(q, k.transpose(1, 2)) # QK^T multiplication
 ```
 
-Given a token in the input, <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20i%20%5Cin%20X%5EL" title="i \in X^L" style="vertical-align:middle"/>, it is passed to the self-attention function. Then, by means of dot products, scalar values (scores) are obtained between the query vector <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20q_%7Bi%7D%20%3D%20iW%5EQ" title="q_{i} = iW^Q" style="vertical-align:middle"/> and every key vector of the input sequence <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20k_%7Bj%7D" title="k_{j}" style="vertical-align:middle"/>. The intuition is that this performs a similarity operation, similar queries and keys vectors will yield higher scores.
+Given a token in the input, <!-- $$ i \in X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i%20%5Cin%20X%5EL">, it is passed to the self-attention function. Then, by means of dot products, scalar values (scores) are obtained between the query vector <!-- $$ q_{i} = iW^Q $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q_%7Bi%7D%20%3D%20iW%5EQ"> and every key vector of the input sequence <!-- $$ k_{j} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=k_%7Bj%7D">. The intuition is that this performs a similarity operation, similar queries and keys vectors will yield higher scores.
 
-This scores represents how much attention is paid by the self-attention layer to other parts of the sequence when encoding <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20i" title="i" style="vertical-align:middle"/>. By multiplying <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20q_%7Bi%7D" title="q_{i}" style="vertical-align:middle"/> by the matrix <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20K%5E%7BT%7D" title="K^{T}" style="vertical-align:middle"/>, a list of <code class="language-plaintext highlighter-rouge">src_len</code> scores is output. The scores are then passed through a softmax function giving bounded values:
+This scores represents how much attention is paid by the self-attention layer to other parts of the sequence when encoding <!-- $$ i $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i">. By multiplying <!-- $$ q_{i} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q_%7Bi%7D"> by the matrix <!-- $$ K^{T} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K%5E%7BT%7D">, a list of <code class="language-plaintext highlighter-rouge">src_len</code> scores is output. The scores are then passed through a softmax function giving bounded values:
 
-<p align="center">
-<img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Calpha_%7Bi%7D%20%3D%20%5Ctext%7Bsoftmax%7D%28%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20%7BK%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D%29%20%3D%20%5Cfrac%7B%5Cexp%28%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20%7BK%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D%29%7D%7B%20%5Csum_%7Bj%3D0%7D%5E%7Bsrc%5C_len%7D%20%5Cexp%28%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20k_%7Bj%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D%29%7D" title="\alpha_{i} = \text{softmax}(\frac{\mathbf{q}_i {K}^\top}{\sqrt{d_k}}) = \frac{\exp(\frac{\mathbf{q}_i {K}^\top}{\sqrt{d_k}})}{ \sum_{j=0}^{src\_len} \exp(\frac{\mathbf{q}_i k_{j}^\top}{\sqrt{d_k}})}" style="vertical-align:middle"/>
-</p>
+
+<!-- $$
+\alpha_{i} = \text{softmax}(\frac{\mathbf{q}_i {K}^\top}{\sqrt{d_k}}) = \frac{\exp(\frac{\mathbf{q}_i {K}^\top}{\sqrt{d_k}})}{ \sum_{j=0}^{src\_len} \exp(\frac{\mathbf{q}_i k_{j}^\top}{\sqrt{d_k}})}
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha_%7Bi%7D%20%3D%20%5Ctext%7Bsoftmax%7D(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20%7BK%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%20%3D%20%5Cfrac%7B%5Cexp(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20%7BK%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%7D%7B%20%5Csum_%7Bj%3D0%7D%5E%7Bsrc%5C_len%7D%20%5Cexp(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20k_%7Bj%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%7D"></div>
+
+
 
 ```python
     attn_weights_float = utils.softmax(
@@ -240,22 +259,24 @@ This scores represents how much attention is paid by the self-attention layer to
     attn_weights = attn_weights_float.type_as(attn_weights)
 ```
 
-The division by the square root of the dimension of the key vectors <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20d_%7Bk%7D" title="d_{k}" style="vertical-align:middle"/> (for getting more stable gradients) is done previously <code class="language-plaintext highlighter-rouge">q *= self.scaling</code> instead in fairseq.
+The division by the square root of the dimension of the key vectors <!-- $$ d_{k} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=d_%7Bk%7D"> (for getting more stable gradients) is done previously <code class="language-plaintext highlighter-rouge">q *= self.scaling</code> instead in fairseq.
 
 
-For example, given the sentence "the nice cat walks away from us" for the token <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20i%3D%5Ctext%7Bfrom%7D" title="i=\text{from}" style="vertical-align:middle"/>, its corresponding attention weights <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Calpha_%7Bi%7D" title="\alpha_{i}" style="vertical-align:middle"/> for every other token <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20j" title="j" style="vertical-align:middle"/> in the input sequence could be:
+For example, given the sentence "the nice cat walks away from us" for the token <!-- $$ i=\text{from} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i%3D%5Ctext%7Bfrom%7D">, its corresponding attention weights <!-- $$ \alpha_{i} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha_%7Bi%7D"> for every other token <!-- $$ j $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=j"> in the input sequence could be:
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/probs.jpg?raw=true" width="50%" align="center"/>
 </p>
 
-Once we have normalized scores for every pair of tokens <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5C%7Bi%2Cj%5C%7D" title="\{i,j\}" style="vertical-align:middle"/>, we multiply these weights by the value vector <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20v_%7Bj%7D%20%5Cforall%20j%20%5Cin%20X%5EL" title="v_{j} \forall j \in X^L" style="vertical-align:middle"/> (each row in matrix <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20V" title="V" style="vertical-align:middle"/>) and finally sum up those vectors:
+Once we have normalized scores for every pair of tokens <!-- $$ \{i,j\} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5C%7Bi%2Cj%5C%7D">, we multiply these weights by the value vector <!-- $$ v_{j} \forall j \in X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=v_%7Bj%7D%20%5Cforall%20j%20%5Cin%20X%5EL"> (each row in matrix <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V">) and finally sum up those vectors:
 
-<p align="center">
-<img src="https://latex.codecogs.com/svg.latex?%5Cinline%20z_%7Bi%7D%20%3D%20%5Csum_%7Bj%3D0%7D%5E%7Bsrc%5C_len%7D%5Calpha_%7Bi%2Cj%7Dv_%7Bj%7D" title="z_{i} = \sum_{j=0}^{src\_len}\alpha_{i,j}v_{j}" style="vertical-align:middle"/>
-</p>
+<!-- $$
+z_{i} = \sum_{j=0}^{src\_len}\alpha_{i,j}v_{j}
+$$ --> 
 
-Where <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20z_%7Bi%7D" title="z_{i}" style="vertical-align:middle"/> represents row <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20i" title="i" style="vertical-align:middle"/> of <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20Z" title="Z" style="vertical-align:middle"/>. By doing the matrix multiplication of the attention weight matrix <code class="language-plaintext highlighter-rouge">attn_weights</code> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20V" title="V" style="vertical-align:middle"/>, <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Cmathrm%7Bsoftmax%7D%28%5Cfrac%7BQK%5E%7BT%7D%7D%7B%5Csqrt%7Bd_k%7D%7D%29V" title="\mathrm{softmax}(\frac{QK^{T}}{\sqrt{d_k}})V" style="vertical-align:middle"/>, we directly get matrix <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20Z" title="Z" style="vertical-align:middle"/>.
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%7Bi%7D%20%3D%20%5Csum_%7Bj%3D0%7D%5E%7Bsrc%5C_len%7D%5Calpha_%7Bi%2Cj%7Dv_%7Bj%7D"></div>
+
+Where <!-- $$ z_{i} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%7Bi%7D"> represents row <!-- $$ i $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i"> of <!-- $$ Z $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=Z">. By doing the matrix multiplication of the attention weight matrix <code class="language-plaintext highlighter-rouge">attn_weights</code> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V">, <!-- $$ \mathrm{softmax}(\frac{QK^{T}}{\sqrt{d_k}})V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bsoftmax%7D(%5Cfrac%7BQK%5E%7BT%7D%7D%7B%5Csqrt%7Bd_k%7D%7D)V">, we directly get matrix <!-- $$ Z $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=Z">.
 
 
 ```python
@@ -264,13 +285,15 @@ Where <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20z_%7Bi%7D" titl
     attn = torch.bmm(attn_probs, v)
 ```
 
-This process is done in parallel in each of the self-attention heads. So, in total <code class="language-plaintext highlighter-rouge">encoder_attention_heads</code> matrices are output. Each head has its own <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20W%5E%7BQ%7D%2C%20W%5E%7BK%7D" title="W^{Q}, W^{K}" style="vertical-align:middle"/> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20W%5E%7BV%7D" title="W^{V}" style="vertical-align:middle"/> weight matrices which are randomly initialized, so the result leads to different representation subspaces in each of the self-attention heads.
+This process is done in parallel in each of the self-attention heads. So, in total <code class="language-plaintext highlighter-rouge">encoder_attention_heads</code> matrices are output. Each head has its own <!-- $$ W^{Q}, W^{K} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BQ%7D%2C%20W%5E%7BK%7D"> and <!-- $$ W^{V} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BV%7D"> weight matrices which are randomly initialized, so the result leads to different representation subspaces in each of the self-attention heads.
 
-The output matrices <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20Z" title="Z" style="vertical-align:middle"/> of every self-attention head are concatenated into a single one to which a linear transformation <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20W%5E%7BO%7D" title="W^{O}" style="vertical-align:middle"/> (<code class="language-plaintext highlighter-rouge">self.out_proj</code>) is applied:
+The output matrices <!-- $$ Z $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=Z"> of every self-attention head are concatenated into a single one to which a linear transformation <!-- $$ W^{O} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BO%7D"> (<code class="language-plaintext highlighter-rouge">self.out_proj</code>) is applied:
 
-<p align="center">
-<img src="https://latex.codecogs.com/svg.latex?%5Cinline%20attn%20%3D%20Concat%28Z%5E%7Bhead_%7Bi%7D%7D%2C%5Ccdots%2CZ%5E%7Bhead_%7Bh%7D%7D%29W%5E%7BO%7D" title="attn = Concat(Z^{head_{i}},\cdots,Z^{head_{h}})W^{O}" style="vertical-align:middle"/>
-</p>
+<!-- $$
+attn = Concat(Z^{head_{i}},\cdots,Z^{head_{h}})W^{O}
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn%20%3D%20Concat(Z%5E%7Bhead_%7Bi%7D%7D%2C%5Ccdots%2CZ%5E%7Bhead_%7Bh%7D%7D)W%5E%7BO%7D"></div>
 
 ```python
     #concatenating each head representation before W^o projection
@@ -296,11 +319,11 @@ To facilitate these residual connections, all sub-layers in the model, as well a
 
 ## Decoder
 
-The decoder is composed of a stack of <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20N%3Ddecoder%5C_layers" title="N=decoder\_layers" style="vertical-align:middle"/> identical layers.
+The decoder is composed of a stack of <!-- $$ N=decoder\_layers $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=N%3Ddecoder%5C_layers"> identical layers.
 
-The goal of the decoder is to generate a sequence <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Cmathcal%7BY%7D" title="\mathcal{Y}" style="vertical-align:middle"/> in the target language. The <code class="language-plaintext highlighter-rouge">TransformerDecoder</code> inherits from <code class="language-plaintext highlighter-rouge">FairseqIncrementalDecoder</code>. It differs from the encoder in that it performs incremental decoding. This means that at each time step <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20t" title="t" style="vertical-align:middle"/> a forward pass is done through the decoder, generating <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20output_%7Bt%7D" title="output_{t}" style="vertical-align:middle"/>, which is then fed as input to the next time step decoding process.
+The goal of the decoder is to generate a sequence <!-- $$ \mathcal{Y} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BY%7D"> in the target language. The <code class="language-plaintext highlighter-rouge">TransformerDecoder</code> inherits from <code class="language-plaintext highlighter-rouge">FairseqIncrementalDecoder</code>. It differs from the encoder in that it performs incremental decoding. This means that at each time step <!-- $$ t $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=t"> a forward pass is done through the decoder, generating <!-- $$ output_{t} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=output_%7Bt%7D">, which is then fed as input to the next time step decoding process.
 
-The encoder output <code class="language-plaintext highlighter-rouge">encoder_out.encoder_out</code> is used by the decoder (in each layer) together with <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Cmathcal%7BY%7D%3Ct%3D%28output_%7B0%7D%2C...%2Coutput_%7Bt-1%7D%29" title="\mathcal{Y}<t=(output_{0},...,output_{t-1})" style="vertical-align:middle"/> (<code class="language-plaintext highlighter-rouge">prev_output_tokens</code>) to generate one feature vector per target token at each time step (<code class="language-plaintext highlighter-rouge">tgt_len = 1</code> in each forward pass). This feature vector is then transformed by a linear layer and passed through a softmax layer <code class="language-plaintext highlighter-rouge">self.output_layer(x)</code> to get a probability distribution over the target language vocabulary.
+The encoder output <code class="language-plaintext highlighter-rouge">encoder_out.encoder_out</code> is used by the decoder (in each layer) together with <!-- $$ \mathcal{Y}<t=(output_{0},...,output_{t-1}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BY%7D%3Ct%3D(output_%7B0%7D%2C...%2Coutput_%7Bt-1%7D)"> (<code class="language-plaintext highlighter-rouge">prev_output_tokens</code>) to generate one feature vector per target token at each time step (<code class="language-plaintext highlighter-rouge">tgt_len = 1</code> in each forward pass). This feature vector is then transformed by a linear layer and passed through a softmax layer <code class="language-plaintext highlighter-rouge">self.output_layer(x)</code> to get a probability distribution over the target language vocabulary.
 
 Following the beam search algorithm, top <code class="language-plaintext highlighter-rouge">beam</code> hypothesis are chosen and inserted in the batch dimension input of the decoder (<code class="language-plaintext highlighter-rouge">prev_output_tokens</code>) for the next time step.
 
@@ -308,7 +331,7 @@ Following the beam search algorithm, top <code class="language-plaintext highlig
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/decoder.png?raw=true" width="35%" align="center"/>
 </p>
 
-We consider <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20query%5EL" title="query^L" style="vertical-align:middle"/> as the <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20L" title="L" style="vertical-align:middle"/> decoder layer input sequence. <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20query%5E1" title="query^{1}" style="vertical-align:middle"/> refers then to the vector representation of the input sequence tokens of the first layer, after computing <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> on <code class="language-plaintext highlighter-rouge">prev_output_tokens</code>. Note that here <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> is not defined, but we refer to <code class="language-plaintext highlighter-rouge">self.embed_tokens(prev_output_tokens)</code> and <code class="language-plaintext highlighter-rouge">self.embed_positions(prev_output_tokens)</code>.
+We consider <!-- $$ query^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=query%5EL"> as the <!-- $$ L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=L"> decoder layer input sequence. <!-- $$ query^{1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=query%5E%7B1%7D"> refers then to the vector representation of the input sequence tokens of the first layer, after computing <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> on <code class="language-plaintext highlighter-rouge">prev_output_tokens</code>. Note that here <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> is not defined, but we refer to <code class="language-plaintext highlighter-rouge">self.embed_tokens(prev_output_tokens)</code> and <code class="language-plaintext highlighter-rouge">self.embed_positions(prev_output_tokens)</code>.
 
 
 ```python
@@ -431,7 +454,7 @@ The previous snipped of code shows a loop over the layers of the Decoder block <
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/incremental_decoding.png?raw=true" width="40%" align="center"/>
 </p>
 
-In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer (Encoder-Decoder Attention), which performs multi-head attention over the output of the encoder stack as input for <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20W%5E%7BK%7D" title="W^{K}" style="vertical-align:middle"/> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20W%5E%7BV%7D" title="W^{V}" style="vertical-align:middle"/> and the ouput of the sprevious module <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20attn_%7Bt%7D*" title="attn_{t}*" style="vertical-align:middle"/>.  Similar to the encoder, it employs residual connections around each of the sub-layers, followed by layer normalization.
+In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer (Encoder-Decoder Attention), which performs multi-head attention over the output of the encoder stack as input for <!-- $$ W^{K} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BK%7D"> and <!-- $$ W^{V} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BV%7D"> and the ouput of the sprevious module <!-- $$ attn_{t}* $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn_%7Bt%7D*">.  Similar to the encoder, it employs residual connections around each of the sub-layers, followed by layer normalization.
 
 
 ```python
@@ -482,14 +505,14 @@ class TransformerDecoderLayer(nn.Module):
             x = self.self_attn_layer_norm(x)
 ```
 
-During incremental decoding, <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%28output_%7B0%7D%2C...%2Coutput_%7Bt-2%7D%29" title="(output_{0},...,output_{t-2})" style="vertical-align:middle"/> enter the self-attention module as <code class="language-plaintext highlighter-rouge">prev_key</code> and <code class="language-plaintext highlighter-rouge">prev_value</code> vectors that are stored in <code class="language-plaintext highlighter-rouge">incremental_state</code>. Since there is no need to recompute <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20K" title="K" style="vertical-align:middle"/> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20V" title="V" style="vertical-align:middle"/> every time, incremental decoding caches these values and concatenates with keys an values from <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20output_%7Bt-1%7D" title="output_{t-1}" style="vertical-align:middle"/>. Then, updated <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20K" title="K" style="vertical-align:middle"/> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20V" title="V" style="vertical-align:middle"/> are stored in <code class="language-plaintext highlighter-rouge">prev_key</code> and passed again to <code class="language-plaintext highlighter-rouge">incremental_state</code>.
+During incremental decoding, <!-- $$ (output_{0},...,output_{t-2}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=(output_%7B0%7D%2C...%2Coutput_%7Bt-2%7D)"> enter the self-attention module as <code class="language-plaintext highlighter-rouge">prev_key</code> and <code class="language-plaintext highlighter-rouge">prev_value</code> vectors that are stored in <code class="language-plaintext highlighter-rouge">incremental_state</code>. Since there is no need to recompute <!-- $$ K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K"> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V"> every time, incremental decoding caches these values and concatenates with keys an values from <!-- $$ output_{t-1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=output_%7Bt-1%7D">. Then, updated <!-- $$ K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K"> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V"> are stored in <code class="language-plaintext highlighter-rouge">prev_key</code> and passed again to <code class="language-plaintext highlighter-rouge">incremental_state</code>.
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/decoder_self_attn.png?raw=true" width="65%" align="center"/>
 </p>
 
-The last time step output token in each decoding step, <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20output_%7Bt-1%7D" title="output_{t-1}" style="vertical-align:middle"/>, enters as a query after been embedded. So, queries here have one element in the second dimension, that is, there is no need to use matrix <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20Q" title="Q" style="vertical-align:middle"/> notation.
-As before, scalar values (scores) <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Calpha" title="\alpha" style="vertical-align:middle"/> are obtained between the query vector <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20q_%7Bt-1%7D" title="q_{t-1}" style="vertical-align:middle"/> and every key vector of the whole previous tokens sequence.
+The last time step output token in each decoding step, <!-- $$ output_{t-1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=output_%7Bt-1%7D">, enters as a query after been embedded. So, queries here have one element in the second dimension, that is, there is no need to use matrix <!-- $$ Q $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=Q"> notation.
+As before, scalar values (scores) <!-- $$ \alpha $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha"> are obtained between the query vector <!-- $$ q_{t-1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q_%7Bt-1%7D"> and every key vector of the whole previous tokens sequence.
 
 Flashing back to ([fairseq/modules/multihead_attention.py](https://github.com/pytorch/fairseq/blob/master/fairseq/modules/multihead_attention.py)) we can see how key and values are obtained inside the Multihead attention module and how these udates in  <code class="language-plaintext highlighter-rouge">saved_state</code> and  <code class="language-plaintext highlighter-rouge">incremental_state</code> are done:
 
@@ -545,11 +568,11 @@ Flashing back to ([fairseq/modules/multihead_attention.py](https://github.com/py
 
 ### Encoder-Decoder attention
 
-The Encoder-Decoder attention receives key and values from the encoder output <code class="language-plaintext highlighter-rouge">encoder_out.encoder_out</code> and the query from the previous module <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20attn_%7Bt%7D*" title="attn_{t}*" style="vertical-align:middle"/>. Here, <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20q_%7Bt%7D" title="q_{t}" style="vertical-align:middle"/> is compared against every key vector received from the encoder (and transformed by <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20W%5EK" title="W^K" style="vertical-align:middle"/>).
+The Encoder-Decoder attention receives key and values from the encoder output <code class="language-plaintext highlighter-rouge">encoder_out.encoder_out</code> and the query from the previous module <!-- $$ attn_{t}* $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn_%7Bt%7D*">. Here, <!-- $$ q_{t} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=q_%7Bt%7D"> is compared against every key vector received from the encoder (and transformed by <!-- $$ W^K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5EK">).
 
-As before, <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20K" title="K" style="vertical-align:middle"/> and <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20V" title="V" style="vertical-align:middle"/> don't need to be recomputed every time step since they are constant for the whole decoding process. Encoder-Decoder attention uses <code class="language-plaintext highlighter-rouge">static_kv=True</code> so that there is no need to update the <code class="language-plaintext highlighter-rouge">incremental_state</code> (see previous code snipped).
+As before, <!-- $$ K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K"> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V"> don't need to be recomputed every time step since they are constant for the whole decoding process. Encoder-Decoder attention uses <code class="language-plaintext highlighter-rouge">static_kv=True</code> so that there is no need to update the <code class="language-plaintext highlighter-rouge">incremental_state</code> (see previous code snipped).
 
-Now, just one vector <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20z_%7Bt%7D" title="z_{t}" style="vertical-align:middle"/> is generated at each time step by each head as a weighted average of the <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20v" title="v" style="vertical-align:middle"/> vectors.
+Now, just one vector <!-- $$ z_{t} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%7Bt%7D"> is generated at each time step by each head as a weighted average of the <!-- $$ v $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=v"> vectors.
 
 <p align="center"><img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/decoder_enc_dec_attn.png?raw=true" width="45%" align="center"/>
 </p>
@@ -580,9 +603,11 @@ Now, just one vector <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20
 
 As in the case of the encoder, the result is passed through a position-wise feed-forward network composed by two fully connected layers:
 
-<p align="center">
-<img src="https://latex.codecogs.com/svg.latex?%5Cinline%20%5Ctext%7BFeed%20Forward%7D%28x%29%3D%5Cmax%280%2C%20xW_1%20&plus;%20b_1%29%20W_2%20&plus;%20b_2" title="\text{Feed Forward}(x)=\max(0, xW_1 + b_1) W_2 + b_2" style="vertical-align:middle"/></p>
+<!-- $$
+\text{Feed Forward}(x)=\max(0, xW_1 + b_1) W_2 + b_2
+$$ --> 
 
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BFeed%20Forward%7D(x)%3D%5Cmax(0%2C%20xW_1%20%2B%20b_1)%20W_2%20%2B%20b_2"></div>
 
 ```python
         residual = x
