@@ -292,7 +292,7 @@ The output matrices <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20Z
 Notice that <code class="language-plaintext highlighter-rouge">attn_probs</code> has dimensions (bsz * self.num_heads, tgt_len, src_len)
 
 
-To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension <img src="https://latex.codecogs.com/svg.latex?%5Cinline%20_%7B%5Ctext%7Bmodel%7D%7D%3D" title="_{\text{model}}=" style="vertical-align:middle"/><code class="language-plaintext highlighter-rouge">encoder_embed_dim</code>.
+To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension <code class="language-plaintext highlighter-rouge">encoder_embed_dim</code>.
 
 ## Decoder
 
