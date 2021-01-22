@@ -60,15 +60,11 @@ From now on, let's consider <!-- $$ X^L $$ --> <img style="background: white;" s
 
 Note that although <!-- $$ X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL"> is represented in fairseq as a tensor of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, for the shake of simplicity, we take <code class="language-plaintext highlighter-rouge">batch=1</code> in the upcoming mathematical notation and just consider it as a <code class="language-plaintext highlighter-rouge">src_len x encoder_embed_dim</code> matrix.
 
-<p align="center">
 
 <!-- $$
 X^L = \begin{bmatrix} x_{0}\\ \vdots\\ x_{src\_len} \end{bmatrix}
 $$ --> 
-
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL%20%3D%20%5Cbegin%7Bbmatrix%7D%20x_%7B0%7D%5C%5C%20%5Cvdots%5C%5C%20x_%7Bsrc%5C_len%7D%20%5Cend%7Bbmatrix%7D"></div>
-
-</p>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL%20%3D%20%5Cbegin%7Bbmatrix%7D%20x_%7B0%7D%5C%5C%20%5Cvdots%5C%5C%20x_%7Bsrc%5C_len%7D%20%5Cend%7Bbmatrix%7D"></p>
 
 Where <!-- $$ x_{i} \in \mathbb{R}^{encoder\_embed\_dim} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=x_%7Bi%7D%20%5Cin%20%5Cmathbb%7BR%7D%5E%7Bencoder%5C_embed%5C_dim%7D">.
 
@@ -159,17 +155,10 @@ class TransformerEncoderLayer(nn.Module):
 
 Then, the result is passed through a position-wise feed-forward network composed by two fully connected layers, <code class="language-plaintext highlighter-rouge">fc1</code> and <code class="language-plaintext highlighter-rouge">fc2</code> with a ReLU activation in between (<code class="language-plaintext highlighter-rouge">self.activation_fn(self.fc1(x))</code>) and dropout <code class="language-plaintext highlighter-rouge">self.dropout_module(x)</code>.
 
-<p align="center">
-
 <!-- $$
 \text{Feed Forward}(x)=\max(0, xW_1 + b_1) W_2 + b_2
-$$ --> 
-
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BFeed%20Forward%7D(x)%3D%5Cmax(0%2C%20xW_1%20%2B%20b_1)%20W_2%20%2B%20b_2"></div>
-
-</p>
-
-
+$$ -->
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BFeed%20Forward%7D(x)%3D%5Cmax(0%2C%20xW_1%20%2B%20b_1)%20W_2%20%2B%20b_2" class="center"></p>
 
 ```python
     residual = x
@@ -232,8 +221,7 @@ The self-attention module does the following operation:
 <!-- $$
 \mathrm{softmax}(\frac{QK^\top}{\sqrt{d_{k}}})V
 $$ --> 
-
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bsoftmax%7D(%5Cfrac%7BQK%5E%5Ctop%7D%7B%5Csqrt%7Bd_%7Bk%7D%7D%7D)V"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bsoftmax%7D(%5Cfrac%7BQK%5E%5Ctop%7D%7B%5Csqrt%7Bd_%7Bk%7D%7D%7D)V" class="center"></p>
 
 ```python
     attn_weights = torch.bmm(q, k.transpose(1, 2)) # QK^T multiplication
@@ -247,8 +235,7 @@ This scores represents how much attention is paid by the self-attention layer to
 <!-- $$
 \alpha_{i} = \text{softmax}(\frac{\mathbf{q}_i {K}^\top}{\sqrt{d_k}}) = \frac{\exp(\frac{\mathbf{q}_i {K}^\top}{\sqrt{d_k}})}{ \sum_{j=0}^{src\_len} \exp(\frac{\mathbf{q}_i k_{j}^\top}{\sqrt{d_k}})}
 $$ --> 
-
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha_%7Bi%7D%20%3D%20%5Ctext%7Bsoftmax%7D(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20%7BK%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%20%3D%20%5Cfrac%7B%5Cexp(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20%7BK%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%7D%7B%20%5Csum_%7Bj%3D0%7D%5E%7Bsrc%5C_len%7D%20%5Cexp(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20k_%7Bj%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%7D"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha_%7Bi%7D%20%3D%20%5Ctext%7Bsoftmax%7D(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20%7BK%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%20%3D%20%5Cfrac%7B%5Cexp(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20%7BK%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%7D%7B%20%5Csum_%7Bj%3D0%7D%5E%7Bsrc%5C_len%7D%20%5Cexp(%5Cfrac%7B%5Cmathbf%7Bq%7D_i%20k_%7Bj%7D%5E%5Ctop%7D%7B%5Csqrt%7Bd_k%7D%7D)%7D" class="center"></p>
 
 
 
@@ -273,8 +260,7 @@ Once we have normalized scores for every pair of tokens <!-- $$ \{i,j\} $$ --> <
 <!-- $$
 z_{i} = \sum_{j=0}^{src\_len}\alpha_{i,j}v_{j}
 $$ --> 
-
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%7Bi%7D%20%3D%20%5Csum_%7Bj%3D0%7D%5E%7Bsrc%5C_len%7D%5Calpha_%7Bi%2Cj%7Dv_%7Bj%7D"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%7Bi%7D%20%3D%20%5Csum_%7Bj%3D0%7D%5E%7Bsrc%5C_len%7D%5Calpha_%7Bi%2Cj%7Dv_%7Bj%7D" class="center"></p>
 
 Where <!-- $$ z_{i} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%7Bi%7D"> represents row <!-- $$ i $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i"> of <!-- $$ Z $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=Z">. By doing the matrix multiplication of the attention weight matrix <code class="language-plaintext highlighter-rouge">attn_weights</code> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V">, <!-- $$ \mathrm{softmax}(\frac{QK^{T}}{\sqrt{d_k}})V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bsoftmax%7D(%5Cfrac%7BQK%5E%7BT%7D%7D%7B%5Csqrt%7Bd_k%7D%7D)V">, we directly get matrix <!-- $$ Z $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=Z">.
 
@@ -292,8 +278,7 @@ The output matrices <!-- $$ Z $$ --> <img style="background: white;" src="https:
 <!-- $$
 attn = Concat(Z^{head_{i}},\cdots,Z^{head_{h}})W^{O}
 $$ --> 
-
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn%20%3D%20Concat(Z%5E%7Bhead_%7Bi%7D%7D%2C%5Ccdots%2CZ%5E%7Bhead_%7Bh%7D%7D)W%5E%7BO%7D"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn%20%3D%20Concat(Z%5E%7Bhead_%7Bi%7D%7D%2C%5Ccdots%2CZ%5E%7Bhead_%7Bh%7D%7D)W%5E%7BO%7D" class="center"></p>
 
 ```python
     #concatenating each head representation before W^o projection
@@ -606,8 +591,7 @@ As in the case of the encoder, the result is passed through a position-wise feed
 <!-- $$
 \text{Feed Forward}(x)=\max(0, xW_1 + b_1) W_2 + b_2
 $$ --> 
-
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BFeed%20Forward%7D(x)%3D%5Cmax(0%2C%20xW_1%20%2B%20b_1)%20W_2%20%2B%20b_2"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Ctext%7BFeed%20Forward%7D(x)%3D%5Cmax(0%2C%20xW_1%20%2B%20b_1)%20W_2%20%2B%20b_2" class="center"></p>
 
 ```python
         residual = x
