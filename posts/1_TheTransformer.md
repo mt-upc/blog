@@ -1,5 +1,5 @@
 # The Transformer: fairseq edition
-*by [Javier Ferrando](https://github.com/javiferran)*
+*by Javier Ferrando*
 
 The Transformer was presented in ["Attention is All You Need"](https://arxiv.org/abs/1706.03762) and introduced a new architecture for many NLP tasks. In this post we exhibit an explanation of the Transformer architecture on Neural Machine Translation focusing on the [fairseq](https://github.com/pytorch/fairseq) implementation. We believe this could be useful for researchers and developers starting out on this framework.
 
@@ -10,7 +10,7 @@ The blog is inspired by [The annotated Transformer](https://nlp.seas.harvard.edu
 The Transformer is based on a stack of encoders and another stack of decoders. The encoder maps an input sequence of tokens <!-- $$ \mathcal{X}=(token_{0},...,token_{src\_len}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BX%7D%3D(token_%7B0%7D%2C...%2Ctoken_%7Bsrc%5C_len%7D)"> to a sequence of continuous vector representations <!-- $$ encoder\_out = (encoder\_out_0,..., encoder\_out_{src\_len}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=encoder%5C_out%20%3D%20(encoder%5C_out_0%2C...%2C%20encoder%5C_out_%7Bsrc%5C_len%7D)">. Given <!-- $$ encoder\_out $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=encoder%5C_out">, the decoder then generates an output sequence <!-- $$ \mathcal{Y} = (output_0,...,output_{T}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BY%7D%20%3D%20(output_0%2C...%2Coutput_%7BT%7D)"> of symbols one element at a time. At each step the model is auto-regressive, consuming the previously generated symbols as additional input when generating the next token.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/transformer.png?raw=true" width="50%" align="center"/>
+    <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer/transformer.png?raw=true" width="50%" align="center"/>
 </p>
 
 To see the general structure of the code in fairseq implementation I recommend reading [Fairseq Transformer, BART](https://yinghaowang.xyz/technology/2020-03-14-FairseqTransformer.html).
@@ -55,7 +55,7 @@ The encoder recieves a list of tokens <!-- $$ \mathcal{X}= $$ --> <img style="ba
 From now on, let's consider <!-- $$ X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL"> as the <!-- $$ L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=L"> encoder layer input sequence. <!-- $$ X^{1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5E%7B1%7D"> refers then to the vectors representation of the input sequence tokens of the first layer, after computing <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> on <code class="language-plaintext highlighter-rouge">src_tokens</code>.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/operations.png?raw=true" width="45%" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer/operations.png?raw=true" width="45%" align="center"/>
 </p>
 
 Note that although <!-- $$ X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=X%5EL"> is represented in fairseq as a tensor of shape <code class="language-plaintext highlighter-rouge">src_len x batch x encoder_embed_dim</code>, for the sake of simplicity, we take <code class="language-plaintext highlighter-rouge">batch=1</code> in the upcoming mathematical notation and just consider it as a <code class="language-plaintext highlighter-rouge">src_len x encoder_embed_dim</code> matrix.
@@ -124,7 +124,7 @@ This returns a NamedTuple object <code class="language-plaintext highlighter-rou
 The previous snippet of code shows a loop over the layers of the Encoder block, <code class="language-plaintext highlighter-rouge">for layer in self.layers</code>. This layer is implemented in fairseq in <code class="language-plaintext highlighter-rouge">class TransformerEncoderLayer(nn.Module)</code> inside [fairseq/modules/transformer_layer.py](https://github.com/pytorch/fairseq/blob/master/fairseq/modules/transformer_layer.py) and computes the following operations:
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/encoder.png?raw=true" width="25%" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer/encoder.png?raw=true" width="25%" align="center"/>
 </p>
 
 The input of the encoder layer is passed through the self-attention module <code class="language-plaintext highlighter-rouge">self.self_attn</code>, dropout (<code class="language-plaintext highlighter-rouge">self.dropout_module(x)</code>) is then applied before getting to the Residual & Normalization module (made of a residual connection <code class="language-plaintext highlighter-rouge">self.residual_connection(x, residual)</code> and a layer normalization (LayerNorm) <code class="language-plaintext highlighter-rouge">self.self_attn_layer_norm(x)</code>
@@ -252,7 +252,7 @@ The division by the square root of the dimension of the key vectors <!-- $$ d_{k
 For example, given the sentence "the nice cat walks away from us" for the token <!-- $$ i=\text{from} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=i%3D%5Ctext%7Bfrom%7D">, its corresponding attention weights <!-- $$ \alpha_{i} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Calpha_%7Bi%7D"> for every other token <!-- $$ j $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=j"> in the input sequence could be:
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/probs.jpg?raw=true" width="50%" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer/probs.jpg?raw=true" width="50%" align="center"/>
 </p>
 
 Once we have normalized scores for every pair of tokens <!-- $$ \{i,j\} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5C%7Bi%2Cj%5C%7D">, we multiply these weights by the value vector <!-- $$ v_{j} \forall j \in X^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=v_%7Bj%7D%20%5Cforall%20j%20%5Cin%20X%5EL"> (each row in matrix <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V">) and finally sum up those vectors:
@@ -313,7 +313,7 @@ The encoder output <code class="language-plaintext highlighter-rouge">encoder_ou
 Following the beam search algorithm, top <code class="language-plaintext highlighter-rouge">beam</code> hypotheses are chosen and inserted in the batch dimension input of the decoder (<code class="language-plaintext highlighter-rouge">prev_output_tokens</code>) for the next time step.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/decoder.png?raw=true" width="35%" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer/decoder.png?raw=true" width="35%" align="center"/>
 </p>
 
 We consider <!-- $$ query^L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=query%5EL"> as the <!-- $$ L $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=L"> decoder layer input sequence. <!-- $$ query^{1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=query%5E%7B1%7D"> refers then to the vector representation of the input sequence tokens of the first layer, after computing <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> on <code class="language-plaintext highlighter-rouge">prev_output_tokens</code>. Note that here <code class="language-plaintext highlighter-rouge">self.forward_embedding</code> is not defined, but we refer to <code class="language-plaintext highlighter-rouge">self.embed_tokens(prev_output_tokens)</code> and <code class="language-plaintext highlighter-rouge">self.embed_positions(prev_output_tokens)</code>.
@@ -436,7 +436,7 @@ def extract_features_scriptable(
 The previous snippet of code shows a loop over the layers of the Decoder block <code class="language-plaintext highlighter-rouge">for idx, layer in enumerate(self.layers):</code>. This layer is implemented in fairseq in <code class="language-plaintext highlighter-rouge">class TransformerDecoderLayer(nn.Module)</code> inside [fairseq/modules/transformer_layer.py](https://github.com/pytorch/fairseq/blob/master/fairseq/modules/transformer_layer.py) and computes the following operations:
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/incremental_decoding.png?raw=true" width="40%" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer/incremental_decoding.png?raw=true" width="40%" align="center"/>
 </p>
 
 In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer (Encoder-Decoder Attention), which performs multi-head attention over the output of the encoder stack as input for <!-- $$ W^{K} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BK%7D"> and <!-- $$ W^{V} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=W%5E%7BV%7D"> and the ouput of the previous module <!-- $$ attn_{t}* $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=attn_%7Bt%7D*">.  Similar to the encoder, it employs residual connections around each of the sub-layers, followed by layer normalization.
@@ -493,7 +493,7 @@ class TransformerDecoderLayer(nn.Module):
 During incremental decoding, <!-- $$ (output_{0},...,output_{t-2}) $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=(output_%7B0%7D%2C...%2Coutput_%7Bt-2%7D)"> enter the self-attention module as <code class="language-plaintext highlighter-rouge">prev_key</code> and <code class="language-plaintext highlighter-rouge">prev_value</code> vectors that are stored in <code class="language-plaintext highlighter-rouge">incremental_state</code>. Since there is no need to recompute <!-- $$ K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K"> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V"> every time, incremental decoding caches these values and concatenates with keys an values from <!-- $$ output_{t-1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=output_%7Bt-1%7D">. Then, updated <!-- $$ K $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=K"> and <!-- $$ V $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=V"> are stored in <code class="language-plaintext highlighter-rouge">prev_key</code> and passed again to <code class="language-plaintext highlighter-rouge">incremental_state</code>.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/decoder_self_attn.png?raw=true" width="65%" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer/decoder_self_attn.png?raw=true" width="65%" align="center"/>
 </p>
 
 The last time step output token in each decoding step, <!-- $$ output_{t-1} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=output_%7Bt-1%7D">, enters as a query after been embedded. So, queries here have one element in the second dimension, that is, there is no need to use matrix <!-- $$ Q $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=Q"> notation.
@@ -559,7 +559,7 @@ As before, <!-- $$ K $$ --> <img style="background: white;" src="https://render.
 
 Now, just one vector <!-- $$ z_{t} $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%7Bt%7D"> is generated at each time step by each head as a weighted average of the <!-- $$ v $$ --> <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=v"> vectors.
 
-<p align="center"><img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer_JavierFerrando/decoder_enc_dec_attn.png?raw=true" width="45%" align="center"/>
+<p align="center"><img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/1_TheTransformer/decoder_enc_dec_attn.png?raw=true" width="45%" align="center"/>
 </p>
 
 

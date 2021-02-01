@@ -6,4 +6,7 @@ Welcome to the blog of the [Machine Translation group](https://mt.cs.upc.edu) at
 
 # Posts
 
-1 - [The Transformer: fairseq edition](./1_TheTransformer_JavierFerrando.md) by [Javier Ferrando](https://github.com/javiferran)
+* [The Transformer: fairseq edition](./posts/1_TheTransformer.md) *by Javier Ferrando*
+
+* Major Breakthroughs in...
+    * [Neural Machine Translation](./posts/2a_MajorBreakthroughs_NMT.md) *by Marta R. Costa-jussà, Gerard I. Gállego, Javier Ferrando & Carlos Escolano*
