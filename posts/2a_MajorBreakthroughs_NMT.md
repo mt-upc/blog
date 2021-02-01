@@ -6,7 +6,7 @@ The motivation of this blog is to share our research findings in a more understa
 In the first post, we will start from scratch on the fascinating topic of Neural Machine Translation. 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets//2a_MajorBreakthroughs_NMT/chronology.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2a_MajorBreakthroughs_NMT/chronology.png?raw=true" width="750px" align="center"/>
 </p>
 
 ## Context
@@ -18,7 +18,7 @@ Back in 2014, the rise of deep learning had already surprised the community in a
 The first breakthrough that allowed NMT to obtain state-of-the-art results was attention, which solved the issues caused by the bottleneck between the encoder and the decoder (Bahdanau et al., 2015). It addressed the problems of token repetition and partial translation that previous architectures showed due to representing the whole sentence in a single vector, thus creating an information bottleneck. The attention mechanism allows the network to adjust the encoder representation for each decoding step by weighting the amount of information provided by each source token.  When the decoder needs to generate a word, it computes the attention score between every input representation from the encoder and the current decoder state. Then, the decoder uses these scores to calculate the weighted sum of the input representations, which is used to generate the next token. Apart from Bahdanau’s, several methods have been proposed as score functions (Luong et al., 2015).
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets//2a_MajorBreakthroughs_NMT/paper_attention.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2a_MajorBreakthroughs_NMT/paper_attention.png?raw=true" width="750px" align="center"/>
 </p>
 
 ## Subword units (2016)
@@ -26,7 +26,7 @@ The first breakthrough that allowed NMT to obtain state-of-the-art results was a
 When using neural approaches for modelling language, either conditioned or unconditioned, the vocabulary size has been an issue for a long time (Bengio et al., 2003). The last layer of these architectures consists of a softmax that computes the probability of each word over the entire vocabulary. The only way to efficiently face it has been limiting the vocabulary size. This limitation had the consequence of having plenty of out-of-vocabulary words. One alternative to this was to use character-based models (Costa-jussà & Fonollosa, 2016), since the vocabulary of characters is already limited compared to the words’. More than this, Sennrich et al. (2016a) proposed to use byte pair encoding to break the words into subwords, having the best of both worlds: words and characters. Subwords are created from the most frequent sequences of characters up to a certain number of merges that is defined. Therefore, most probable combinations appear together, while the less frequent are represented as individual characters. With this approach, the problem of unknown words is solved, while keeping an acceptable vocabulary size. The advantage of subwords over characters is clear in terms of performance and efficiency, because using characters requires much longer sequences that slowed the training process. Furthermore, in terms of translation quality, subwords represent semantic information better than characters, which can be crucial for the model performance.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets//2a_MajorBreakthroughs_NMT/paper_subwords.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2a_MajorBreakthroughs_NMT/paper_subwords.png?raw=true" width="750px" align="center"/>
 </p>
 
 ## Back-translation (2016)
@@ -34,7 +34,7 @@ When using neural approaches for modelling language, either conditioned or uncon
 Beyond the previous vocabulary and attention challenges, the scarcity or lack of parallel corpora was a relevant problem for the neural approach. In low resourced environments, statistical systems were still better suited (Koehn & Knowles, 2017). One reason was that statistical systems could take advantage of large monolingual language models, while the integration of this idea was not very clear in neural approaches (Gulcehre et al., 2017). This limitation was solved with the idea of back-translation (Sennrich et al., 2016b). In back-translation, we automatically translate a monolingual corpus to generate a parallel pseudo-corpus, where the source language is synthetic and the target language is not. Experiments show that this technique highly improves the translation quality, being an efficient option to exploit the large quantities of monolingual available.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets//2a_MajorBreakthroughs_NMT/paper_backtranslation.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2a_MajorBreakthroughs_NMT/paper_backtranslation.png?raw=true" width="750px" align="center"/>
 </p>
 
 ## Transformer (2017)
@@ -42,7 +42,7 @@ Beyond the previous vocabulary and attention challenges, the scarcity or lack of
 With the advent of harnessing large amounts of data into the system by using techniques like back-translation, it became more visible that using recurrent neural networks for training was a limitation. Basically, with these types of architecture, the training process can not be parallelized and it has to be sequential, since in a recurrent neural network each step depends on the previous one. More than this, RNNs have the practical issue that they do not perform well in very long sequences (>200). The use of convolution neural networks (Gehring et al., 2017) allowed for parallel training, at the cost of higher memory consumption. Finally, the Transformer (Vaswani et al., 2017) relied only on attention layers combined with fully-connected ones, allowing parallelization and showing remarkable performance in long sequences.  The impact of this architecture exceeds the limits of NMT (Vinyals et al., 2019) and we are proud of having devoted the [first post](https://mt.cs.upc.edu/2020/12/21/the-transformer-fairseq-edition/) of our blog to it, where we explained the Transformer architecture, focusing on the Fairseq implementation, and describing its essential modules and operations.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets//2a_MajorBreakthroughs_NMT/paper_transformer.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2a_MajorBreakthroughs_NMT/paper_transformer.png?raw=true" width="750px" align="center"/>
 </p>
 
 While NMT has not even come close to solving all the challenges that machine translation has, it raises new opportunities towards universal communication. In the following posts, we are discussing the background and progress in the subareas of multilinguality, speech translation, bias, interpretability, linguistics, lifelong learning and unsupervised learning.
