@@ -12,7 +12,7 @@ Multilingual Neural Machine Translation is the task that allows for translation 
 Among the most popular machine translation approaches, there are the rule-based, the statistical and the neural machine translation. Multilingual machine translation within the rule-based and statistical systems has been approached either from a pairwise, pivot, or interlingual approach. While pairwise approach requires a quadratic number of translation systems, pivot and interlingual had the advantage of having a linear dependency with languages. With the appearance of neural machine translation, new opportunities such as transfer learning, zero-shot, massive and pre-trained models have arisen. Multilingual approaches have evolved jointly with neural machine translation, which started with recurrent neural networks with attention (Bahdanau et al., 2015) and moved to the current Transformer architecture (Vaswani et al., 2017).
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2b_MajorBreakthroughs_MultilingualNMT/pairwise.png?raw=true" height="300px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2b_MajorBreakthroughs_MultilingualNMT/pairwise.png?raw=true" width="175px" align="center"/>
 </p>
 
 ## Transfer Learning (2016)
@@ -25,13 +25,13 @@ This research direction is based on the idea that translation from some language
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2b_MajorBreakthroughs_MultilingualNMT/shared_attention.png?raw=true" height="300px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2b_MajorBreakthroughs_MultilingualNMT/shared_attention.png?raw=true" width="175px" align="center"/>
 </p>
 
 One of the limitations of this first approach was that it could not directly perform zero-shot translation, meaning that by training the system with English-Catalan and English-Chinese, the system can learn Chinese-Catalan, for which it was not explicitly trained. An alternative proposed by the same authors (Firat et al., 2016b) was to perform back-translation and fine-tune the shared attention layer with the new pseudo-parallel corpus. More recent approaches have also proposed new shared modules based on multi-head attention (Zhu et al., 2020) or even no sharing modules at all (Escolano et al., 2020), in order to achieve zero-shot translation.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2b_MajorBreakthroughs_MultilingualNMT/zeroshot.png?raw=true" height="175px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2b_MajorBreakthroughs_MultilingualNMT/zeroshot.png?raw=true" width="230px" align="center"/>
 </p>
 
 ## Zero-shot (2017)
@@ -43,7 +43,7 @@ The first zero-shot without any parallel data (nor pseudo-parallel corpus) arriv
 </p>
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2b_MajorBreakthroughs_MultilingualNMT/shared_encdec.png?raw=true" height="200px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2b_MajorBreakthroughs_MultilingualNMT/shared_encdec.png?raw=true" width="280px" align="center"/>
 </p>
 
 ## Massive (2019)
