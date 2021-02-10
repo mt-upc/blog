@@ -28,7 +28,7 @@ This research direction is based on the idea that translation from some language
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2b_MajorBreakthroughs_MultilingualNMT/shared_attention.png?raw=true" width="175px" align="center"/>
 </p>
 
-One of the limitations of this first approach was that it could not directly perform zero-shot translation, meaning that by training the system with English-Catalan and English-Chinese, the system can learn Chinese-Catalan, for which it was not explicitly trained. An alternative proposed by the same authors (Firat et al., 2016b) was to perform back-translation and fine-tune the shared attention layer with the new pseudo-parallel corpus. More recent approaches have also proposed new shared modules based on multi-head attention (Zhu et al., 2020) or even no sharing modules at all (Escolano et al., 2020), in order to achieve zero-shot translation.
+One of the limitations of this first approach was that it could not directly perform zero-shot translation (e.g. to translate Chinese-Catalan without being explicitly trained for it, after being trained with Chinese-English and English-Catalan). An alternative proposed by the same authors (Firat et al., 2016b) was to perform back-translation and fine-tune the shared attention layer with the new pseudo-parallel corpus. More recent approaches have also proposed new shared modules based on multi-head attention (Zhu et al., 2020) or even no sharing modules at all (Escolano et al., 2020), in order to achieve zero-shot translation.
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2b_MajorBreakthroughs_MultilingualNMT/zeroshot.png?raw=true" width="230px" align="center"/>
