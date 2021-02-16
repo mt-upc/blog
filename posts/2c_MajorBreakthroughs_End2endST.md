@@ -4,13 +4,13 @@
 The initial motivation behind speech-to-text translation was to obtain a written form for those languages that lack a writing system (Besacier et al., 2006). Nowadays, the primary motivation has shifted, and we perceive speech translation as an extraordinary opportunity for breaking language barriers in spoken communication. Especially during these days, in which most of the meetings are taking place virtually. Furthermore, we are experiencing an unprecedented democratization of audiovisual content production and broadcasting; hence, translating speech is more crucial than ever.
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/chronology.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/chronology.png?raw=true" width="750px" align="center"/>
 </p>
 
 The classical way to face the task was to transcribe the speech utterance with an automatic speech recognition (ASR) module and then translate it with a machine translation (MT) system, which is known as "cascade"  or "pipeline" ST. However, in the last years, the community has proposed a new paradigm in which speech is not transcripted but directly translated into the target language, using a single sequence-to-sequence model. This approach, known as "end-to-end" or "direct" ST, supposes many advantages over the former, such as avoiding the concatenation of errors, the direct use of prosodic from speech and a lower inference time. Nevertheless, direct ST systems struggle to achieve cascade performance due to data scarcity. There is a tradeoff between error propagation from the pipeline approach and the data inefficiency of end-to-end systems (Sperber et al., 2019). 
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/cascade_end2end.png?raw=true" width="500px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/cascade_end2end.png?raw=true" width="500px" align="center"/>
 </p>
 
 The International Conference on Spoken Language Translation (IWSLT) evaluation campaign, which has separate categories for cascade and end-to-end systems, allows tracking both approaches' evolution. In the 2020 edition, an end-to-end system achieved the best result in the challenge for the first time (Ansari et al., 2020).
@@ -27,13 +27,13 @@ The work by Weiss et al. (2017) supposed the consolidation of the end-to-end app
 
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/paper_seq2seq_foreign.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/paper_seq2seq_foreign.png?raw=true" width="750px" align="center"/>
 </p>
 
 Furthermore, the authors introduced a training strategy where the system can benefit from available transcriptions. They proposed a multi-task training in which the encoder updates its parameters based on both ST and ASR tasks. It is important to remark that, during inference, they could use the ST system without the ASR-specific decoder, so it did not need transcriptions during this phase.
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/multitask.png?raw=true" width="200px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/multitask.png?raw=true" width="200px" align="center"/>
 </p>
 
 ## ASR pre-training (2018)
@@ -43,11 +43,11 @@ Although (Weiss et al., 2017) supposed a significant milestone for the ST commun
 After the release of such an extensive corpus, Bérard et al. (2018) developed an end-to-end model trained with the new dataset. It was the first ST system trained with a significant amount of data, and thus, it became a benchmark. Even more important is that they proposed an alternative to the multi-task strategy: using an encoder pre-trained in the ASR task as a starting point of the ST training.
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/paper_asr_pretraining.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/paper_asr_pretraining.png?raw=true" width="750px" align="center"/>
 </p>
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/asr_pretraining.png?raw=true" width="200px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/asr_pretraining.png?raw=true" width="200px" align="center"/>
 </p>
 
 Both multi-task and pre-training strategies caused a significant impact on the field. They opened the door to consider transcriptions as a valuable resource during the training of end-to-end ST systems, in an attempt to reduce the performance gap with the cascade systems. These new strategies used transcriptions as targets for auxiliary ASR systems, but also as inputs for auxiliary MT models. For instance, Liu et al. (2019) proposed to use Knowledge Distillation to train the ST model with an MT system as the teacher, Indurthi et al. (2020) suggested using meta-learning to transfer knowledge from ASR and MT tasks to the ST task, and Kano et al. (2017) and Wang et al. (2020) trained their systems with a curriculum learning strategy that considers ASR and MT as elementary courses. Furthermore, a current trend proposes to divide the encoder into two parts, that process the acoustic and the semantic information independently, and train them by different multi-task learning strategies (Dong et al., 2020a)(Dong et al., 2020b)(Liu et al., 2020b).
@@ -59,13 +59,13 @@ While the ST field was growing, larger datasets also appeared. After Augmented L
 Hence, a new idea emerged within the community, seeking to benefit from those larger datasets to train the ST systems. The strategy consisted of performing data augmentation with synthetic ST corpora, obtained using a high-quality MT model on an ASR dataset, or a text-to-speech system on an MT corpus.
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/data_augmentation.png?raw=true" width="300px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/data_augmentation.png?raw=true" width="300px" align="center"/>
 </p>
 
 Finetuning an ST model with synthetic data was the approach followed by Jia et al. (2019) to boost their system's performance. Furthermore, they provided insights into avoiding overfitting when working with TTS-generated data, like using a high-quality multispeaker TTS model and freezing the pre-trained encoder.
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/paper_weakly_supervised.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/paper_weakly_supervised.png?raw=true" width="750px" align="center"/>
 </p>
 
 Similarly, Pino et al. (2019) analyzed different pre-training, finetuning, and data augmentation strategies. Their model showed competitive performance compared to robust cascade systems, but they realized that using too much TTS-generated data could be harmful to the system performance.
@@ -77,11 +77,11 @@ In 2017, the introduction of the Transformer (Vaswani et al., 2017) supposed a r
 Speech representations (e.g. spectrograms) are much longer sequences than text representations, which can cause some problems. Hence, it is common to reduce the input sequence length when using sequence-to-sequence architectures for ST. Considering this, Di Gangi et al. (2019b) proposed an adaptation of the Transformer for ST, which adds some layers before the Transformer encoder with that purpose. Concretely, it combines two 2D convolutional layers, that capture local patterns and reduce the sequence length, and two 2D self-attention layers, that model the long-range dependencies. Furthermore, the Transformer encoder has a logarithmic distance penalty that biases its self-attention layers towards the local context.
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/paper_stransformer.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/paper_stransformer.png?raw=true" width="750px" align="center"/>
 </p>
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/stransformer.png?raw=true" width="350px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/stransformer.png?raw=true" width="350px" align="center"/>
 </p>
 
 ## Multilingual End-to-end ST (2019)
@@ -91,7 +91,7 @@ Nowadays, there is an increasing interest in developing multilingual ST systems.
 Inaguma et al. (2019) proposed the first multilingual ST system. Following a similar approach to machine translation systems, it uses a shared encoder and decoder for all the languages. They explored both the one-to-many and the many-to-many scenario, using target forcing to choose the output language. To do so, they added a language token at the beginning of the target sentence.
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/paper_multilingual.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/paper_multilingual.png?raw=true" width="750px" align="center"/>
 </p>
 
 Simultaneously, Di Gangi et al. (2019c) proposed a very similar approach which, instead of prepending a language token to the output sentence, merges a language embedding to the speech representations. However, in this case, they only explored the one-to-many scenario.
@@ -107,7 +107,7 @@ One of the most notable self-supervised models for speech applications is Wav2Ve
 More recently, Li et al. (2020) have shown even more encouraging results using Wav2Vec as the encoder and another pre-trained module, mBART (Liu et al., 2020a), as the decoder. They finetune the model following a particular training strategy with many frozen layers. Furthermore, they train it with multilingual data, and it is even capable of performing zero-shot translation. Probably, this paper will be one of the most influential ones in the ST field.
 
 <p align="center">
-<img src="../assets/2c_MajorBreakthroughs_End2endST/paper_selfsupervised.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2c_MajorBreakthroughs_End2endST/paper_selfsupervised.png?raw=true" width="750px" align="center"/>
 </p>
 
 End-to-end ST has still a long way ahead, but, as we have seen throughout this post, it has experienced considerable improvements in very few years. We look forward to the upcoming innovations, and we will do our best to contribute favourably to the growth of this field.
