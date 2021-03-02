@@ -12,4 +12,5 @@ Welcome to the blog of the [Machine Translation group](https://mt.cs.upc.edu) at
     * [Neural Machine Translation](./posts/2a_MajorBreakthroughs_NMT.md) *by Marta R. Costa-jussà, Gerard I. Gállego, Javier Ferrando & Carlos Escolano*
     * [Multilingual Neural Machine Translation](./posts/2b_MajorBreakthroughs_MultilingualNMT.md) *by Marta R. Costa-jussà, Carlos Escolano & Gerard I. Gállego*
     * [End-to-end Speech Translation](./posts/2c_MajorBreakthroughs_End2endST.md) *by Gerard I. Gállego*
+    * [Interpretability in Neural Machine Translation](./posts/2d_MajorBreakthroughs_InterpretabilityNMT.md) *by Javier Ferrando*
 
