@@ -7,19 +7,19 @@ Jacovi and Goldberg (2020) propose two different **criteria** to **define the in
 Two main types of approaches have been explored in the NLP literature, **post-hoc methods** and **building inherently interpretable** models. Post-hoc methods' main advantage is that they are model agnostic since they try to explain the model prediction based on the relevance of the input tokens, this is also known as attribution. On the other hand, inherently interpretable models such as those with attention mechanisms have been developed, although their faithfulness has been criticized (Jain and Wallace, 2019; Serrano and Smith, 2019).  Lately, the main used architecture in NLP has been the Transformer (Vaswani et al., 2017), which is based on this attention mechanism and the efforts in the interpretability field have been mainly focused on this model.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2d_MajorBreakthroughs_InterpretabilityNMT/transformer.png" width="700px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2d_MajorBreakthroughs_InterpretabilityNMT/transformer.png" width="700px" align="center"/>
 </p>
 
 A common framework to evaluate interpretability methods regarding attribution is the **word alignment task**, which consists of finding many-to-many mappings between the source words to their translations in the target sentence.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2d_MajorBreakthroughs_InterpretabilityNMT/word_alignment.png" width="250px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2d_MajorBreakthroughs_InterpretabilityNMT/word_alignment.png" width="250px" align="center"/>
 </p>
 
 Word alignment in NMT measures the importance of the input words when translating a target word. Therefore, it suits well the goal of attribution interpretability methods. A gold alignment dataset by human annotators is used to compare how well the interpretability method can extract word alignments from the model. Alignment Error Rate (AER) score is then used to measure how similar these alignments are with respect to the reference. SMT systems tend to perform better word alignments than neural approaches despite being less accurate in terms of translation performance. The reference system is GIZA++ (Och and Ney., 2003) which gets an AER of 21% in German-to-English translations.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2d_MajorBreakthroughs_InterpretabilityNMT/chronology.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2d_MajorBreakthroughs_InterpretabilityNMT/chronology.png?raw=true" width="750px" align="center"/>
 </p>
 
 Now we present the main **interpretability methods** that have been applied in the **NMT** literature. These methods include both post-hoc techniques and inherently interpretable models. As post-hoc methods, there are those based on the gradient and propagation-based ones. As for inherently interpretable models, there are those analyzing the attention mechanism.
@@ -36,13 +36,13 @@ $$ -->
 <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=grad(f(x))"> measures the sensitivity of the output of the function with respect to the input vector x. The model sensitivity to a feature perturbation has been regarded as a possible measure for the "importance" of the feature. This method has firstly been applied in NLP (Li et al., 2016), which computes the mean of the components of the gradient w.r.t input token representation to get a sensitivity measure of each token.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2d_MajorBreakthroughs_InterpretabilityNMT/paper_explaining_with_gradients.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2d_MajorBreakthroughs_InterpretabilityNMT/paper_explaining_with_gradients.png?raw=true" width="750px" align="center"/>
 </p>
 
 A variation within the gradient-based methods is the **gradient x input method** (Denil et al., 2014). It basically consists of also computing the dot product between the gradient and the input vector. This gives a value of saliency of each word, which can be defined as the marginal effect of each input word on the prediction. (Ding et al., 2019) applied this method to get the word saliency in an NMT system. They contrast this method with the word alignment problem and obtain 36.4% AER in the German-to-English setting.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2d_MajorBreakthroughs_InterpretabilityNMT/paper_nmt_saliency.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2d_MajorBreakthroughs_InterpretabilityNMT/paper_nmt_saliency.png?raw=true" width="750px" align="center"/>
 </p>
 
 ## Attention-based methods (2020)
@@ -50,7 +50,7 @@ A variation within the gradient-based methods is the **gradient x input method**
 Several works (Jain and Wallace, 2019; Serrano and Smith, 2019; Clark et al., 2019) in the NLP field have tried to interpret models by studying the attention mechanism. The attention mechanism assigns weights to each of the input tokens, therefore seems to be logical to think that these weights are ideal to understand attribution. However, it has been found that this is not necessarily the case (Danish Pruthi et al., 2020). Kobayashi et al. (2020) go further on this topic and analyze the encoder-decoder attention module in a Transformer-based NMT system. Their main contribution is the use of not only the attention weights but also the norm of the vector by which the attention weights are multiplied. Using this method, they are able to achieve in German-to-English translations an AER of 25% in the second layer of the encoder-decoder attention module.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2d_MajorBreakthroughs_InterpretabilityNMT/paper_attention_vector_norms.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2d_MajorBreakthroughs_InterpretabilityNMT/paper_attention_vector_norms.png?raw=true" width="750px" align="center"/>
 </p>
 
 ## Propagation-based methods (2020)
@@ -58,13 +58,13 @@ Several works (Jain and Wallace, 2019; Serrano and Smith, 2019; Clark et al., 20
 Layer-wise relevance propagation methods consist of computing a forward-pass through the network, where the predicted value for a certain class is obtained (Bach et al., 2015). This value is considered the total relevance of the network for that class. Then a backward-pass is done and for each layer, the relevance is distributed across the different neurons till the input is reached. Finally, a relevance score is given to each input element.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2d_MajorBreakthroughs_InterpretabilityNMT/propagation_based.png?raw=true" width="500px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2d_MajorBreakthroughs_InterpretabilityNMT/propagation_based.png?raw=true" width="500px" align="center"/>
 </p>
 
 In NMT, Voita et al. (2020) use this method to measure the degree of contribution of the source sequence vs the target sequence when translating a certain word. NMT models translate sequentially. When translating the first word all the attention is given to the input sequence, but as tokens are produced by the decoder, they demonstrate that the attention is detoured towards the previously generated target tokens.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2d_MajorBreakthroughs_InterpretabilityNMT/paper_source_target_contributions.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2d_MajorBreakthroughs_InterpretabilityNMT/paper_source_target_contributions.png?raw=true" width="750px" align="center"/>
 </p>
 
 This research field is evolving fast, with a lot of new approaches appearing lately, both in the NLP and NMT fields. However, it doesn’t seem there is a clear direction into which methods get the clearest explanations, which shows that we are still in the early stages of the interpretation of deep learning models.
