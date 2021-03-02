@@ -31,7 +31,7 @@ Gradient-based methods are heavily used in this research field since they are ea
 <!-- $$
 f(x) = grad(f(x)) * x
 $$ --> 
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%20grad(f(x))%20*%20x"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=f(x)%20%3D%20grad(f(x))%20*%20x"></p>
 
 <img style="background: white;" src="https://render.githubusercontent.com/render/math?math=grad(f(x))"> measures the sensitivity of the output of the function with respect to the input vector x. The model sensitivity to a feature perturbation has been regarded as a possible measure for the "importance" of the feature. This method has firstly been applied in NLP (Li et al., 2016), which computes the mean of the components of the gradient w.r.t input token representation to get a sensitivity measure of each token.
 
