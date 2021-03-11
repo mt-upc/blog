@@ -93,3 +93,14 @@ While this post is just a small selection of papers, each of these papers contri
 - Zhu, C., Yu, H., Cheng, S., & Luo, W. (2020). Language-aware Interlingua for Multilingual Neural Machine Translation. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (pp. 1650–1655). Association for Computational Linguistics.
 
 - Zoph, B., & Knight, K. (2016). Multi-Source Neural Translation. In Proceedings of the 2016 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (pp. 30–34). Association for Computational Linguistics.
+
+## Citation
+
+```
+@misc{costajussa-major-breakthroughs-multinmt,
+  author = {Costa-jussà, Marta R. and Escolano, Carlos and Gállego, Gerard I.},
+  title = {Major Breakthroughs in... Multilingual Neural Machine Translation (II)},
+  year = {2021},
+  howpublished = {\url{https://mt.cs.upc.edu/2021/02/08/major-breakthroughs-in-multilingual-neural-machine-translation-ii/}},
+}
+```

@@ -76,3 +76,14 @@ While NMT has not even come close to solving all the challenges that machine tra
 - Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A., Kaiser, L., & Polosukhin, I. (2017). Attention is All you Need. In Advances in Neural Information Processing Systems (pp. 5998–6008).
 
 - Vinyals, O., Babuschkin, I., Czarnecki, W.M. et al. (2019) Grandmaster level in StarCraft II using multi-agent reinforcement learning. Nature 575, 350–354.
+
+## Citation
+
+```
+@misc{costajussa-major-breakthroughs-nmt,
+  author = {Costa Jussà, Marta R. and Gállego, Gerard I. and Ferrando, Javier and Escolano, Carlos},
+  title = {Major Breakthroughs in... Neural Machine Translation (I)},
+  year = {2021},
+  howpublished = {\url{https://mt.cs.upc.edu/2021/02/01/major-breakthroughs-in-neural-machine-translation-i/}},
+}
+```

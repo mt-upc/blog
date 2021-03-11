@@ -174,3 +174,14 @@ End-to-end ST has still a long way ahead, but, as we have seen throughout this p
 - Weiss, R. J., Chorowski, J., Jaitly, N., Wu, Y., & Chen, Z. (2017). Sequence-to-Sequence Models Can Directly Translate Foreign Speech. Proc. Interspeech 2017, 2625-2629.
 
 - Wu, A., Wang, C., Pino, J., & Gu, J. (2020). Self-Supervised Representations Improve End-to-End Speech Translation. In Proc. Interspeech 2020 (pp. 1491–1495).
+
+## Citation
+
+```
+@misc{gallego-major-breakthroughs-st,
+  author = {Gállego, Gerard I.},
+  title = {Major Breakthroughs in... End-to-end Speech Translation (III)},
+  year = {2021},
+  howpublished = {\url{https://mt.cs.upc.edu/2021/02/15/major-breakthroughs-in-end-to-end-speech-translation-iii/}},
+}
+```

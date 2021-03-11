@@ -96,3 +96,14 @@ This research field is evolving fast, with a lot of new approaches appearing lat
 - Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A., Kaiser, L., & Polosukhin, I. (2017). Attention is All you Need. In Advances in Neural Information Processing Systems. Curran Associates, Inc..
 
 - Voita, E., Sennrich, R., & Titov, I. (2020). Analyzing the Source and Target Contributions to Predictions in Neural Machine Translation. arXiv preprint arXiv:2010.10907.
+
+## Citation
+
+```
+@misc{ferrando-major-breakthroughs-interpretability,
+  author = {Ferrando, Javier},
+  title = {Major Breakthroughs in... Interpretability in Neural Machine Translation (IV)},
+  year = {2021},
+  howpublished = {\url{https://mt.cs.upc.edu/2021/03/01/major-breakthroughs-in-interpretability-in-neural-machine-translation-iv/}},
+}
+```
