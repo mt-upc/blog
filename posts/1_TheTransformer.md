@@ -615,3 +615,14 @@ Finally, a residual connection is made before another layer normalization layer.
 ...
         return x, attn, None
 ```
+
+## Citation
+
+```
+@misc{ferrando-transformer,
+  author = {Ferrando, Javier},
+  title = {The Transformer: fairseq edition},
+  year = {2020},
+  howpublished = {\url{https://mt.cs.upc.edu/2020/12/21/the-transformer-fairseq-edition/}},
+}
+```

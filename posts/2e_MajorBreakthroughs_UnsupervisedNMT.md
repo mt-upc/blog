@@ -130,3 +130,14 @@ Unsupervised NMT is a challenging scenario, however it may allow to overcome som
 - Zhang, M., Liu, Y., Luan, H., & Sun, M. (2017). Adversarial Training for Unsupervised Bilingual Lexicon Induction. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) (pp. 1959–1970). Association for Computational Linguistics.
 
 - Zhang, M., Xu, K., Kawarabayashi, K.i., Jegelka, S., & Boyd-Graber, J. (2019). Are Girls Neko or Shōjo? Cross-Lingual Alignment of Non-Isomorphic Embeddings with Iterative Normalization. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (pp. 3180–3189). Association for Computational Linguistics.
+
+## Citation
+
+```
+@misc{biesialska-major-breakthroughs-unsupnmt,
+  author = {Biesialska, Magdalena},
+  title = {Major Breakthroughs in... Unsupervised Neural Machine Translation (V)},
+  year = {2021},
+  howpublished = {\url{https://mt.cs.upc.edu/2021/03/08/major-breakthroughs-in-unsupervised-neural-machine-translation-v/}},
+}
+```
