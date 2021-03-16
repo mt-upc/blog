@@ -2,7 +2,7 @@
 *by Ksenia Kharitonova*
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/chronology.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/chronology.png?raw=true" width="750px" align="center"/>
 </p>
 
 This post continues giving the context of our work, and today we will discuss adding linguistic information to neural machine translation. Among different alternatives, factors have been a key way to add this type of information in the neural approach. Factors describe a word by a tuple that adds various linguistic information, such as lemma, morphological information, POS, dependency labels, etc., to its surface form. Using factors as an input to MT models was already possible when the state-of-the-art methods were still based on statistical MT (Koehn and Hoang, 2007); after the advent of encoder-decoder models for NMT with the seminal Bahdanau et al. (2016) work, it was a logical step to add linguistic information to the new NMT architectures.
@@ -14,7 +14,7 @@ The majority of contemporary NMT models learn from the raw sentence-aligned para
 ## Source Factored NMT (2016)
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/paper_src_factored_nmt.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/paper_src_factored_nmt.png?raw=true" width="750px" align="center"/>
 </p>
 
 Sennrich and Haddow (2016a) were pioneers in using the additional linguistic information as  input for the newly appeared encoder-decoder NMT models.  Considering language pairs with less inflective and more inflective languages, such as  English and  German, they argued that using lemmas beside tokens would reduce the sparsity of the data and allow the inflectional forms of the same word to share the representation in the model. Using parts-of-speech (POS) would help the model disambiguate between the polysemic words where the same word form can share different word types: for example, the English word *close* could be an adjective, a noun, or a verb, and the architecture that has only tokens as an input was making a mistake of translating this word as the most frequent class (verb) in the sentence.
@@ -38,13 +38,13 @@ The evaluation on the English<->German and low-resource English->Romanian transl
 ## Target Factored NMT (2016)
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/paper_tgt_factored_nmt.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/paper_tgt_factored_nmt.png?raw=true" width="750px" align="center"/>
 </p>
 
 García-Martínez et al. (2016) proposed a different way of incorporating factors in the NMT model. In their case, the factors were not input but predicted: instead of predicting the words themselves, they output the combination of a lemma with a concatenation of the linguistic factors that gave the information on how to inflect a given lemma. For example, from the French word *devient*, they obtained the lemma devenir and the factors *VP3\#S*, meaning that it is a *V*erb, in *P*resent, *3*rd person, irrelevant gender (*\#*) and *S*ingular. This added a step of generating the final word results by the morphological parser (that was also used to annotate the target words).
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/tgt_factored_nmt.png?raw=true" width="500px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/tgt_factored_nmt.png?raw=true" width="500px" align="center"/>
 </p>
 
 The architecture of this model followed (Bahdanau et al., 2016) but the RNN decoder was modified in such a way as to produce two streams of outputs instead of one (the lemmas and the factors). In cases where the decoder produced two sequences of different lengths for lemmas and the factors, the factors sequence was constrained to be the same as the lemmas sequence. In order to be able to use the RNN decoder output for computing the hidden state, different choices for combining the lemmas and factor embeddings were proposed: using only lemmas, combining the two outputs linearly (sum) or non-linearly (tanh).
@@ -58,41 +58,41 @@ This approach for resolving the open vocabulary problem was further developed in
 An adjacent way of incorporating syntactic information in the NMT models makes use not only of the flattened representation of linguistic tags in the form of factor tuples with linguistic information but of the whole linguistic trees based on dependency or constituency grammars.
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/paper_syntactic_nmt_1.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/paper_syntactic_nmt_1.png?raw=true" width="750px" align="center"/>
 </p>
 
 Aharoni and Goldberg (2017) did this by translating a source sentence into a linearized, lexicalized constituency tree with the help of seq2tree encoder-decoder architecture based on the work of Vinyals et al. (2015). They reported improvement on the BLEU scores compared with the syntax-agnostic systems on WMT16 German-English dataset and demonstrated that a syntax-aware model performed more reordering of the sentences therefore resolving a different word order problem. 
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/syntactic_nmt_1.png?raw=true" width="550px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/syntactic_nmt_1.png?raw=true" width="550px" align="center"/>
 </p>
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/paper_syntactic_nmt_2.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/paper_syntactic_nmt_2.png?raw=true" width="750px" align="center"/>
 </p>
 
 Nădejde et al. (2017) added the syntactic information to the target by including Combinatorial Categorial Grammar (CCG) supertags in the decoder and interleaving them with the word sequence. Unlike factors, where the syntactic information was input (or output) alongside basic words in streams, interleaving supposes that the CCG tags are included as an extra token before each word of the target sequence. This approach showed statistically significant improvement in translation quality for a high-resource (German->English) and a low-resource (Romanian->English) pair as well as resolved some specific syntactic phenomena, e.g. prepositional phrase attachment.
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/syntactic_nmt_2.png?raw=true" width="500px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/syntactic_nmt_2.png?raw=true" width="500px" align="center"/>
 </p>
 
 Li et al. (2017) linearized a phrase parse tree into a structural label sequence on the source side and incorporated it into the encoder in 3 different ways: 1) Parallel RNN encoder that learns word and label annotation vectors parallelly, 2) Hierarchical RNN encoder that learns word and label annotation vectors in a two-level hierarchy, and 3) Mixed RNN encoder that stitchingly learns word and label annotation vectors over sequences where words and labels are mixed. Evaluating the effectiveness of different approaches on Chinese-to-English translation the authors demonstrated that Mixed RNN Encoder best improved over the baseline; this model also was better in correcting word alignment and phrase alignment as well as overtranslation (repeating the translated word when the model does not know how to translate the next one) errors.
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/syntactic_nmt_3.png?raw=true" width="259px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/syntactic_nmt_3.png?raw=true" width="259px" align="center"/>
 </p>
 
 Currey and Heafield (2018) extended the approach of Li et al. (2017) by adapting a multi-source method for incorporating linearized source parses into NMT. This model consisted of two identical RNN encoders with no shared parameters, as well as a standard RNN decoder. For each target sentence, two versions of the source sentence were used: the standard sequence of words and the linearized parse (lexicalized or unlexicalized). Each of these was encoded simultaneously using the encoders; the encodings were then combined using the hierarchical attention combination and input to the decoder. The hierarchical attention combination proposed by Libovickỳ and Helcl (2017) included a separate attention mechanism for each encoder; these were then combined using an additional attention mechanism over the two separate context vectors. The proposed model improved over both seq2seq and parsed baselines on the WMT17 English->German task. Analysis of the performance on the longer sentences also reported an improvement.
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/syntactic_nmt_4.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/syntactic_nmt_4.png?raw=true" width="750px" align="center"/>
 </p>
 
 ## Semantic Factored NMT (2018)
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/paper_semantic_factored_nmt.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/paper_semantic_factored_nmt.png?raw=true" width="750px" align="center"/>
 </p>
 
 So far the factored models only used the morphological and syntactic linguistic information as input (or output) for factored NMT models. España-Bonet and Genabith, 2018 proposed to use the power of semantic networks and semantic information. Using BabelNet (Navigli and Ponzetto, 2012) and its multilingual synsets they built a multilingual NMT system for several European languages where the input sequences were tagged with the word synsets from the BabelNet. 
@@ -102,7 +102,7 @@ The main characteristic of the BabelNet is that its synsets (the groupings of sy
 The authors used the same architecture as Sennrich and Haddow (2016a), concatenating the embedding matrices for factors for the RNN encoder hidden state computation. As they were able to tag only 27% of the corpus with synsets, in the case where the retrieval of the synset was not possible a coarse POS tag was used for the remaining tokens. BPE subword segmentation was also applied.
 
 <p align="center">
-<img src="../assets/2f_MajorBreakthroughs_FactoredNMT/semantic_factored_nmt.png?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2f_MajorBreakthroughs_FactoredNMT/semantic_factored_nmt.png?raw=true" width="750px" align="center"/>
 </p>
 
 Using a TED Multilingual corpus of En–De–Nl–Ro–It the authors showed a modest improvement in BLEU and METEOR over the baseline on the other languages to the English translations. The best results were achieved, however, on the previously unseen languages (Spanish and French) where using the synsets along the words showed a double or triple improvement on BLEU and METEOR for translations to English.
