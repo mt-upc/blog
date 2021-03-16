@@ -154,7 +154,7 @@ In the recent works (Armengol-Estapé et al., 2020; Casas et al., 2021) the fact
 
 ```
 @misc{kharitonova-major-breakthroughs-factorednmt,
-  author = {Kharitonova, Magdalena},
+  author = {Kharitonova, Ksenia},
   title = {Major Breakthroughs in... Factored Neural Machine Translation (VI)},
   year = {2021},
   howpublished = {\url{https://mt.cs.upc.edu/2021/03/15/major-breakthroughs-in-factored-neural-machine-translation-vi/}},
