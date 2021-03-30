@@ -75,7 +75,7 @@ WinoMT (Stanovsky et al., 2019) is the first challenge test set for evaluating g
 <img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/2g_MajorBreakthroughs_GenderBiasNLP/gb_evaluation.png?raw=true" width="400px" align="center"/>
 </p>
 
-References
+## References
 
 - Basta, C., Costa-Jussà, M. R., & Fonollosa, J. A. R. (2020). Towards mitigating gender bias in a decoder-based neural machine translation model by adding contextual information. In Proceedings of The Fourth Widening Natural Language Processing Workshop (pp. 99-102). Association for Computational Linguistics.
 
