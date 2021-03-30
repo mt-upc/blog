@@ -120,6 +120,6 @@ WinoMT (Stanovsky et al., 2019) is the first challenge test set for evaluating g
   author = {Basta, Christine},
   title = {Major Breakthroughs in... Gender Bias in NLP (VII)},
   year = {2021},
-  howpublished = {\url{https://mt.cs.upc.edu/2021/03/29/major-breakthroughs-in-gender bias-in-nlp-vii/}},
+  howpublished = {\url{https://mt.cs.upc.edu/2021/03/29/major-breakthroughs-in-gender-bias-in-nlp-vii/}},
 }
 ```
