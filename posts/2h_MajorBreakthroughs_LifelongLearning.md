@@ -5,7 +5,7 @@
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2h_MajorBreakthroughs_LifelongLearning/chronology.png?raw=true" width="750px" align="center"/>
 </p>
 
-In this post, we present a set of seminal works on lifelong learning that have shaped the field and allowed deep learning methods tolearn without forgetting.
+In this post, we present a set of seminal works on lifelong learning that have shaped the field and allowed deep learning methods to learn without forgetting.
 
 ## Context
 
