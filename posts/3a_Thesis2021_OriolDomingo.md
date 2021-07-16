@@ -61,15 +61,21 @@ At this point, we formulated a multi-task set-up, but this is an optional step s
 If the previous constraint holds (existence of complementary tasks), which is our case, then, it is possible to build a bijective mapping function that given a variable <!-- $x$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x"> satisfies <!-- $x = f^{-1}(f(x))$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x%20%3D%20f%5E%7B-1%7D(f(x))">, where <!-- $f^{-1}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f%5E%7B-1%7D"> is the inverse function of <!-- $f$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f">. In our case, both functions represent the same model, hence, it holds that <!-- $f^{-1} = f$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f%5E%7B-1%7D%20%3D%20f">, which is an involutory function.
 This mathematical framework allows training without or with few parallel data. The main idea is that the model can learn from unlabeled data: unlabeled triples <!-- $\mathcal{U}_\mathcal{K}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BU%7D_%5Cmathcal%7BK%7D"> and unlabeled text <!-- $\mathcal{U}_\mathcal{T}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BU%7D_%5Cmathcal%7BT%7D"> ; using its own predictions over these non-parallel data. Finally, the optimisation pass for both cycle losses can be back-propagated together on each batch.
 
-$$
+<!-- $$
 z_\alpha(y)=\hat x \longrightarrow \mathcal{L}_{cycle}=\mathbb{E}_{y\in\mathcal{U}_{\mathcal{T}}}[ \ -\log \ p(y|\hat x;\alpha) \ ]
-$$
-$$
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%5Calpha(y)%3D%5Chat%20x%20%5Clongrightarrow%20%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7By%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BT%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(y%7C%5Chat%20x%3B%5Calpha)%20%5C%20%5D"></div>
+<!-- $$
 z_\alpha(x)=\hat y \longrightarrow \mathcal{L}_{cycle}=\mathbb{E}_{x\in\mathcal{U}_{\mathcal{K}}}[ \ -\log \ p(x|\hat y;\alpha) \ ]
-$$
-$$
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%5Calpha(x)%3D%5Chat%20y%20%5Clongrightarrow%20%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7Bx%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BK%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(x%7C%5Chat%20y%3B%5Calpha)%20%5C%20%5D"></div>
+<!-- $$
 \mathcal{L}_{cycle}=\mathbb{E}_{y\in\mathcal{U}_{\mathcal{T}}}[ \ -\log \ p(y|\hat x;\alpha) \ ] + \mathbb{E}_{x\in\mathcal{U}_{\mathcal{K}}}[ \ -\log \ p(x|\hat y;\alpha) \ ]
-$$
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7By%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BT%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(y%7C%5Chat%20x%3B%5Calpha)%20%5C%20%5D%20%2B%20%5Cmathbb%7BE%7D_%7Bx%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BK%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(x%7C%5Chat%20y%3B%5Calpha)%20%5C%20%5D"></div>
 
 To summarise, the model translates the triples (text) into text (triples), and this synthetic text (triples) is used as an input to predict the real triples (text), as it happens with Back Translation. Exemplified in the figure below with steps (2) and (3). However, the cycle framework has the advantage to iteratively improve the approach to both tasks, resulting in a **lifelong learning loop**.
 
@@ -138,3 +144,12 @@ This post’s main goal has been to train an end-to-end multitask semi-supervise
 - Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W. & Liu, P. (2020). Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. Journal of Machine Learning Research, 21(140), 1-67.
 
 - Zhu, J. Y., Park, T., Isola, P., & Efros, A. A. (2017). Unpaired image-to-image translation using cycle-consistent adversarial networks. In Proceedings of the IEEE international conference on computer vision (pp. 2223-2232).
+
+## Citation
+```
+@misc{thesis_domingo_2021,
+    title={Artificial Intelligence for Knowledge Generation and Knowledge Discovery},
+    author={Domingo, Oriol},
+    year={2021},
+}
+```
