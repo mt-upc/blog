@@ -5,7 +5,7 @@
 <img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/2h_MajorBreakthroughs_LifelongLearning/chronology.png?raw=true" width="750px" align="center"/>
 </p>
 
-In this post, we present a set of seminal works on lifelong learning that have shaped the field and allowed deep learning methods tolearn without forgetting.
+In this post, we present a set of seminal works on lifelong learning that have shaped the field and allowed deep learning methods to learn without forgetting.
 
 ## Context
 
@@ -117,9 +117,9 @@ LLL is a very broad and active research area. In this blog post, we shed light o
 
 - Michael McCloskey and Neal J Cohen. 1989\. Catastrophic interference in connectionist networks: The sequential learning problem. In Psychology of learning and motivation, volume 24, pages 109–165\. Elsevier.
 
-- Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019\. Language models are unsupervised multitask learners. OpenAI Blog, 1(8):9.
+- Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019\. Language models are unsupervised multitask learners. OpenAI Blog.
 
--  Martín. 2020\. ¿Cómo aprendemos?: una aproximación científica al aprendizaje y la enseñanza. Editorial Graó.
+- Héctor Ruiz Martín. 2020\. ¿Cómo aprendemos?: una aproximación científica al aprendizaje y la enseñanza. Editorial Graó.
 
 - Hanul Shin, Jung Kwon Lee, Jaehong Kim, and Jiwon Kim. 2017\. Continual learning with deep generative replay. In Advances in Neural Information Processing Systems (NeurIPS), pages 2990–2999.
 
