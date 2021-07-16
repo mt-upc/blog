@@ -40,6 +40,7 @@ Deep learning models significantly improve at the expenses of data. However, the
 ## Methodology
 
 Now, we are going to discuss how to tackle previous tasks using the combination of both, semi-supervised  and multi-task learning.
+
 We can formulate a Knowledge Base as a labeled directed graph (<!-- $\mathcal{K}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BK%7D">) over the triples in the database. Monolingual corpus, particularly text, can be easily formalised as a set of sentences, which are sequences of words (<!-- $\mathcal{T}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BT%7D">). Then, given a data set of supervised examples (<!-- $\mathcal{S}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BS%7D">), we can train a single model to do both, Relationship Extraction and Surface Realisation from <!-- $\mathcal{S}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BS%7D">. 
 
 Ideally, this model (<!-- $f_\alpha$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f_%5Calpha">) is optimised over <!-- $\mathcal{S}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BS%7D"> by means of a maximum log-likelihood estimation:
@@ -70,7 +71,7 @@ $$
 \mathcal{L}_{cycle}=\mathbb{E}_{y\in\mathcal{U}_{\mathcal{T}}}[ \ -\log \ p(y|\hat x;\alpha) \ ] + \mathbb{E}_{x\in\mathcal{U}_{\mathcal{K}}}[ \ -\log \ p(x|\hat y;\alpha) \ ]
 $$
 
-To summarise, the model translates the triples (text) into text (triples), and this synthetic text (triples) is used as an input to predict the real triples (text). Exemplified in the figure below with steps (2) and (3), as it happens with Back Translation. However, the cycle framework has the advantage to iteratively improve the approach to both tasks, resulting in a **lifelong learning loop**.
+To summarise, the model translates the triples (text) into text (triples), and this synthetic text (triples) is used as an input to predict the real triples (text), as it happens with Back Translation. Exemplified in the figure below with steps (2) and (3). However, the cycle framework has the advantage to iteratively improve the approach to both tasks, resulting in a **lifelong learning loop**.
 
 <p align="center">
 <img src="../assets/3a_Thesis2021_OriolDomingo/cycle_training_2.jpg?raw=true" width="750px" align="center"/>
