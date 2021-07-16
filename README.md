@@ -17,3 +17,6 @@ Welcome to the blog of the [Machine Translation group](https://mt.cs.upc.edu) at
     * [Factored Neural Machine Translation](./posts/2f_MajorBreakthroughs_FactoredNMT.md) *by Ksenia Kharitonova*
     * [Gender Bias in NLP](./posts/2g_MajorBreakthroughs_GenderBiasNLP.md) *by Christine Basta*
     * [Lifelong Learning](./posts/2h_MajorBreakthroughs_LifelongLearning.md) *by Magdalena Biesialska*
+
+* Thesis 20/21:
+    * [Artificial Intelligence for Knowledge Generation and Knowledge Discovery](./posts/3a_Thesis2021_OriolDomingo.md) *by Oriol Domingo*
