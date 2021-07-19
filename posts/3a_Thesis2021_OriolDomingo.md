@@ -48,7 +48,7 @@ Ideally, this model (<!-- $f_\alpha$ --> <img style="transform: translateY(0.1em
 <!-- $$
 J(\alpha)=\mathbb{E}_{(x,y)\sim \mathcal{S}}[\ - \log \ p(y|x;\alpha) \ - \ \log \ p(x|y;\alpha) \ ]
 $$ -->
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=J(%5Calpha)%3D%5Cmathbb%7BE%7D_%7B(x%2Cy)%5Csim%20%5Cmathcal%7BS%7D%7D%5B%5C%20-%20%5Clog%20%5C%20p(y%7Cx%3B%5Calpha)%20%5C%20-%20%5C%20%5Clog%20%5C%20p(x%7Cy%3B%5Calpha)%20%5C%20%5D"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=J(%5Calpha)%3D%5Cmathbb%7BE%7D_%7B(x%2Cy)%5Csim%20%5Cmathcal%7BS%7D%7D%5B%5C%20-%20%5Clog%20%5C%20p(y%7Cx%3B%5Calpha)%20%5C%20-%20%5C%20%5Clog%20%5C%20p(x%7Cy%3B%5Calpha)%20%5C%20%5D" align="center"></p>
 
 At this point, we formulated a multi-task set-up, but this is an optional step since one can implement the following cycle training regime with two different models as well, one for each task. 
 
@@ -65,17 +65,17 @@ This mathematical framework allows training without or with few parallel data. T
 z_\alpha(y)=\hat x \longrightarrow \mathcal{L}_{cycle}=\mathbb{E}_{y\in\mathcal{U}_{\mathcal{T}}}[ \ -\log \ p(y|\hat x;\alpha) \ ]
 $$ --> 
 
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%5Calpha(y)%3D%5Chat%20x%20%5Clongrightarrow%20%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7By%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BT%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(y%7C%5Chat%20x%3B%5Calpha)%20%5C%20%5D"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%5Calpha(y)%3D%5Chat%20x%20%5Clongrightarrow%20%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7By%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BT%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(y%7C%5Chat%20x%3B%5Calpha)%20%5C%20%5D" align="center"></p>
 <!-- $$
 z_\alpha(x)=\hat y \longrightarrow \mathcal{L}_{cycle}=\mathbb{E}_{x\in\mathcal{U}_{\mathcal{K}}}[ \ -\log \ p(x|\hat y;\alpha) \ ]
 $$ --> 
 
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%5Calpha(x)%3D%5Chat%20y%20%5Clongrightarrow%20%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7Bx%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BK%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(x%7C%5Chat%20y%3B%5Calpha)%20%5C%20%5D"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=z_%5Calpha(x)%3D%5Chat%20y%20%5Clongrightarrow%20%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7Bx%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BK%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(x%7C%5Chat%20y%3B%5Calpha)%20%5C%20%5D" align="center"></p>
 <!-- $$
 \mathcal{L}_{cycle}=\mathbb{E}_{y\in\mathcal{U}_{\mathcal{T}}}[ \ -\log \ p(y|\hat x;\alpha) \ ] + \mathbb{E}_{x\in\mathcal{U}_{\mathcal{K}}}[ \ -\log \ p(x|\hat y;\alpha) \ ]
 $$ --> 
 
-<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7By%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BT%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(y%7C%5Chat%20x%3B%5Calpha)%20%5C%20%5D%20%2B%20%5Cmathbb%7BE%7D_%7Bx%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BK%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(x%7C%5Chat%20y%3B%5Calpha)%20%5C%20%5D"></div>
+<p align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=%5Cmathcal%7BL%7D_%7Bcycle%7D%3D%5Cmathbb%7BE%7D_%7By%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BT%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(y%7C%5Chat%20x%3B%5Calpha)%20%5C%20%5D%20%2B%20%5Cmathbb%7BE%7D_%7Bx%5Cin%5Cmathcal%7BU%7D_%7B%5Cmathcal%7BK%7D%7D%7D%5B%20%5C%20-%5Clog%20%5C%20p(x%7C%5Chat%20y%3B%5Calpha)%20%5C%20%5D" align="center"></p>
 
 To summarise, the model translates the triples (text) into text (triples), and this synthetic text (triples) is used as an input to predict the real triples (text), as it happens with Back Translation. Exemplified in the figure below with steps (2) and (3). However, the cycle framework has the advantage to iteratively improve the approach to both tasks, resulting in a **lifelong learning loop**.
 
