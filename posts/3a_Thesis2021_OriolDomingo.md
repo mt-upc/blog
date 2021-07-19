@@ -12,7 +12,7 @@ Basically, Siri, or any other voice assistant, is able to answer this question t
 As it can be seen in the figure below, these facts are represented by three elements (hereinafter **triples**) : a subject establishing a relationship with an object through a predicate *\<subject, predicate, object\>*. Commonly, both, the subject and object, are referred as entities, which can be mentioned at several triples in any position, regardless of the predicate.
 
 <p align="center">
-<img src="../assets/3a_Thesis2021_OriolDomingo/knowledge_base.jpg?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3a_Thesis2021_OriolDomingo/knowledge_base.jpg?raw=true" width="750px" align="center"/>
 </p>
 
 However, tech companies need to solve the following issues in order to build and offer accurate applications or services on top of these databases:
@@ -27,7 +27,7 @@ In this post, we will focus on techniques that have been implemented in the rece
 Thus far, we can understand **Knowledge Discovery** as the procedure to uncover new hidden facts given a source, before feeding them into the database. Besides, we also conceive **Knowledge Generation** as the method to produce text, which embeds the whole information of the retrieved knowledge (triples), given a query. An overview of these procedures, with a deep learning model, is depicted in the next figure.
 
 <p align="center">
-<img src="../assets/3a_Thesis2021_OriolDomingo/knowledge_tasks.jpg?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3a_Thesis2021_OriolDomingo/knowledge_tasks.jpg?raw=true" width="750px" align="center"/>
 </p>
 
 For the advanced reader or domain expert, these procedures or methods have been tackled under **Relationship Extraction** and **Surface Realisation** tasks during the last decades (Belz et al., 2011; Leng & Jiang, 2016). At the beginning of this century, models heavily relied on statistical methods (Cohen & Hersh, 2005), however, during the last years end-to-end deep learning approaches (Agarwal et al., 2020) (Liu et al., 2020) have surpassed those early statistical models reaching state-of-the-art results, following the tendency in other domains.
@@ -55,7 +55,7 @@ At this point, we formulated a multi-task set-up, but this is an optional step s
 **Cycle training** was originally suggested as an image-to-image translation, rather than text-to-text (our current approach), a problem where the goal is to learn a mapping between an input image and an output image (Zhu et al., 2017). The main constraint for using cycle training is that there must exist two complementary tasks that guarantee that the input of one task is the output of the other task, and vice-versa. 
 
 <p align="center">
-<img src="../assets/3a_Thesis2021_OriolDomingo/cycle_training_1.jpg?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3a_Thesis2021_OriolDomingo/cycle_training_1.jpg?raw=true" width="750px" align="center"/>
 </p>
 
 If the previous constraint holds (existence of complementary tasks), which is our case, then, it is possible to build a bijective mapping function that given a variable <!-- $x$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x"> satisfies <!-- $x = f^{-1}(f(x))$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=x%20%3D%20f%5E%7B-1%7D(f(x))">, where <!-- $f^{-1}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f%5E%7B-1%7D"> is the inverse function of <!-- $f$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f">. In our case, both functions represent the same model, hence, it holds that <!-- $f^{-1} = f$ --> <img style="transform: translateY(0.1em); background: white;" src="https://render.githubusercontent.com/render/math?math=f%5E%7B-1%7D%20%3D%20f">, which is an involutory function.
@@ -80,7 +80,7 @@ $$ -->
 To summarise, the model translates the triples (text) into text (triples), and this synthetic text (triples) is used as an input to predict the real triples (text), as it happens with Back Translation. Exemplified in the figure below with steps (2) and (3). However, the cycle framework has the advantage to iteratively improve the approach to both tasks, resulting in a **lifelong learning loop**.
 
 <p align="center">
-<img src="../assets/3a_Thesis2021_OriolDomingo/cycle_training_2.jpg?raw=true" width="750px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3a_Thesis2021_OriolDomingo/cycle_training_2.jpg?raw=true" width="750px" align="center"/>
 </p>
 
 
