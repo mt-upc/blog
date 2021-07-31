@@ -10,7 +10,7 @@ First, we have a model trained in 2008, to say any year, which does a great job 
 To solve this problem, the models have to be trained again from scratch with data up to date to be able to output an accurate result.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3b_Thesis2021_LluisGuardia/new_words.gif?raw=true" width="500px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3b_Thesis2021_LluisGuardia/new_words.gif?raw=true" width="500px" align="center"/>
 </p>
 
 In this research, we tried to address this problem by developing and evaluating the usage of Quality Estimation by active learning as a lifelong learning technique. This is for a system that adapts to data that is evolving over time without having the train to model from scratch again.
@@ -33,7 +33,7 @@ Now we can talk about the system. This system, as represented in the figure, rec
 The preprocessed training data is used to train an initial translation model. This model will try to translate the preprocessed lifelong data and use this same data to improve and learn more using active learning methods.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3b_Thesis2021_LluisGuardia/system_overview.png?raw=true" width="600px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3b_Thesis2021_LluisGuardia/system_overview.png?raw=true" width="600px" align="center"/>
 </p>
 
 Additionally, externally to the system, there is a user that can interact with the lifelong learning module, providing the translation for the sentences queried by the system. In our case though, this is an automated block that returns the translation automatically, this translation consists of the target language sentence discarded previously (as commented in DATA). It has to be noted that this process, in reality, involves a notorious increase in the processing time, and so it has been considered the number of times that the human help has been requested with a penalization on the evaluation score.
@@ -51,7 +51,7 @@ With Quality Estimation, we train a model using the [Openkiwi framework](https:/
 Once the model has predicted the scores for the document, the weakest sentences will be the ones we sent to the user translation block.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3b_Thesis2021_LluisGuardia/qe_model.png?raw=true" width="500px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3b_Thesis2021_LluisGuardia/qe_model.png?raw=true" width="500px" align="center"/>
 </p>
 
 In our case we trained various predictor-estimator models, with different input configurations and different parameters values searching for combinations with better results. 
@@ -64,7 +64,7 @@ As the results, first we evaluated the results obtained with the different Quali
 From all of those results, we selected two models for each pair of languages, implemented them into the lifelong block, and obtained the system results using those. Additionally, as a baseline, we implemented a random sampling method to compare them. 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3b_Thesis2021_LluisGuardia/results.png?raw=true" width="600px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3b_Thesis2021_LluisGuardia/results.png?raw=true" width="600px" align="center"/>
 </p>
 
 We can observe how the results obtained with the Quality Estimation models outscore the random ones. Also, when looking at the results obtained with Quality Estimation, there are indications that there is some correlation between the system results and the Quality Estimation model performance.
