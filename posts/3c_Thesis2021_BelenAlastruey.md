@@ -9,19 +9,19 @@
 The task consisting of translating speech into a written form in another language is popularly known as Speech Translation (ST).  It has important applications such as subtitling to another language or translation of non-written languages.
 
 <p align="center">
-<img src="../assets/3c_Thesis2021_BelenAlastruey/st.png?raw=true" width="400px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3c_Thesis2021_BelenAlastruey/st.png?raw=true" width="400px" align="center"/>
 </p>
 
 The first ST model consisted of the concatenation of two independent models, forming what nowadays is known as a cascade system (Ney, 1999). The first module, an Automatic Speech Recognition (ASR) model, writes a transcription of the spoken sentence, and the second one, a Machine Translation (MT) model, translates the transcription to another language.
 
 <p align="center">
-<img src="../assets/3c_Thesis2021_BelenAlastruey/cascade_st.png?raw=true" width="600px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3c_Thesis2021_BelenAlastruey/cascade_st.png?raw=true" width="600px" align="center"/>
 </p>
 
 But these models can have a problem. If the ASR algorithm makes a mistake, even with the best MT algorithm we would get a wrong output. For this reason, in the last few years, new models based on end-to-end architectures have emerged. These models are capable of translating from audio to text, without the need to go through the intermediate step of transcription. These models, also known as direct ST systems, have rapidly evolved and, nowadays, they can reach comparable results to cascade models.
 
 <p align="center">
-<img src="../assets/3c_Thesis2021_BelenAlastruey/end2end_st.png?raw=true" width="350px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3c_Thesis2021_BelenAlastruey/end2end_st.png?raw=true" width="350px" align="center"/>
 </p>
 
 Nevertheless, results provided by both cascade and end-to-end architectures are far from optimal, and therefore these research fields are still under development.
@@ -34,7 +34,7 @@ The Transformer (Vaswani et al., 2017) is the current state-of-the-art model for
 But the self-attention layer has quadratic complexity, it requires calculating n^2 attention weights (being n the number of input words), to get one for every possible combination of words in the input sentence.
 
 <p align="center">
-<img src="../assets/3c_Thesis2021_BelenAlastruey/transformer.png?raw=true" width="850px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3c_Thesis2021_BelenAlastruey/transformer.png?raw=true" width="850px" align="center"/>
 </p>
 
 This is usually not a problem, but it is if the input is a long sequence, for example in the case of documents.  To overcome this problem, many efficient Transformer variants have been proposed, with linear complexity instead of quadratic.
@@ -47,7 +47,7 @@ In the last few years, the Transformer has surpassed the barriers of text. In Sp
 A usual approach is using strided convolutions, to reduce the sequence length before the Transformer encoder (Di Gangi et al., 2019; Wang et al., 2020a).
 
 <p align="center">
-<img src="../assets/3c_Thesis2021_BelenAlastruey/usual_approach.png?raw=true" width="850px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3c_Thesis2021_BelenAlastruey/usual_approach.png?raw=true" width="850px" align="center"/>
 </p>
 
 But we believe using this model could have an inconvenience: the Transformer does not have access to the full original input (the mel-spectrogram), but only to the extracted features obtained after the convolutional layers.
@@ -60,13 +60,13 @@ Although translating long texts is not the objective of this work, we believe th
 Our goal is to take advantage of the lower complexity of these models and create a Speech-to-Text Transformer where the efficient Transformer deals with the audio input.  To achieve this, we propose an architecture where the self-attention layer in a Transformer encoder is substituted by an efficient one. We believe the training could benefit from this approach, since it lets the model learn directly from the spectrogram and no information is lost in the convolutional layers.
 
 <p align="center">
-<img src="../assets/3c_Thesis2021_BelenAlastruey/our_approach.png?raw=true" width="850px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3c_Thesis2021_BelenAlastruey/our_approach.png?raw=true" width="850px" align="center"/>
 </p>
 
 After considering different efficient Transformer models, we chose the Longformer (Beltagy et al., 2020) for our first experiments. The Longformer is a variation on the original Transformer, which achieves a reduction in the complexity of the attention computation, from quadratic to linear. To achieve this, the Longformer defines a pattern in the attention matrix, specifying, for each token combination, the attention weights that need to be computed. Longformer's attention pattern is mainly based on a sliding window, it relies on the importance of local context. An attention window of fixed size is placed around each token.
 
 <p align="center">
-<img src="../assets/3c_Thesis2021_BelenAlastruey/sliding_window.jpg?raw=true" width="200px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3c_Thesis2021_BelenAlastruey/sliding_window.jpg?raw=true" width="200px" align="center"/>
 </p>
 
 ## Results and conclusions
@@ -78,7 +78,7 @@ We compared our systems with the Speech-to-Text Transformer (s2t_transformer) mo
 We trained these models on the MUST-C dataset, and we obtained the following results:
 
 <p align="center">
-<img src="../assets/3c_Thesis2021_BelenAlastruey/results.png?raw=true" width="550px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3c_Thesis2021_BelenAlastruey/results.png?raw=true" width="550px" align="center"/>
 </p>
 
 As you can see, our results are close to the ones obtained with convolutional layers and a regular Transformer, showing less than a 10% relative reduction of the performance, meaning that this is a great starting point for a promising research path.
