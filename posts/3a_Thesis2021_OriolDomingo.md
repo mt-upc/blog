@@ -114,6 +114,10 @@ This post’s main goal has been to train an end-to-end multitask semi-supervise
 * This **lifelong learning** system gives the advantage to easily train the model on new unlabeled data, even from a different domain. 
 * Our unlabeled data notably exceeds the labeled one, in particular, this is beneficial for **minor languages** or **tasks under-represented**, such as Basque or Relationship Extraction respectively.
 
+## Acknowledgements
+
+I want to specially thank Marta R. Costa-jussà for her supervision and comments during the development of this project, and also, Carlos Escolano for his technical feedback. This would not have been possible without the help and support of the UPC’s Machine Translation group.
+
 
 ## References
 
@@ -144,6 +148,7 @@ This post’s main goal has been to train an end-to-end multitask semi-supervise
 - Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., Zhou, Y., Li, W. & Liu, P. (2020). Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer. Journal of Machine Learning Research, 21(140), 1-67.
 
 - Zhu, J. Y., Park, T., Isola, P., & Efros, A. A. (2017). Unpaired image-to-image translation using cycle-consistent adversarial networks. In Proceedings of the IEEE international conference on computer vision (pp. 2223-2232).
+
 
 ## Citation
 ```
