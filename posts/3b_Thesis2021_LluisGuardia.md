@@ -76,6 +76,11 @@ In this research, we have shown that the usage of Quality Estimation models impr
 With this, we expect that more researchers will see that lifelong learning is also feasible in machine translation.
 
 
+## Acknowledgements
+
+This is joint work with Magdalena Biesialska and Marta R. Costa-jussà. I would like to thank them both, along with the UPC's Machine Translation group, for guiding and helping me through this project.
+
+
 ## Citation
 
 ```
