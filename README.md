@@ -22,3 +22,4 @@ Welcome to the blog of the [Machine Translation group](https://mt.cs.upc.edu) at
     * [Artificial Intelligence for Knowledge Generation and Knowledge Discovery](./posts/3a_Thesis2021_OriolDomingo.md) *by Oriol Domingo*
     * [Exploring Lifelong Learning in Neural Machine Translation](./posts/3b_Thesis2021_LluisGuardia.md) *by Lluís Guardia*
     * [Efficient Transformer for Direct Speech Translation](./posts/3c_Thesis2021_BelenAlastruey.md) *by Belén Alastruey*
+    * [Dysarthric Speech Synthesis Via Non-Parallel Voice Conversion](./posts/3d_Thesis2021_MarcIlla.md) *by Marc Illa*
