@@ -24,7 +24,7 @@ For voice conversion the model is trained with the mel-cepstrum of the speech fr
 
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3d_Thesis2021_MarcIlla/vqvae_3stage.png?raw=true" width="550px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3d_Thesis2021_MarcIlla/vqvae_3stage.png?raw=true" width="550px" align="center"/>
 </p>
 
 
@@ -33,7 +33,7 @@ For voice conversion the model is trained with the mel-cepstrum of the speech fr
 For the first task we reuse the task done by Harvill et al. (2021) where they train an ASR system with dysarthric synthetic data and test it on real dysarthric speech with words that have not been used during training. In order to do that they train a VC model to convert unimpaired to dysarthric speech. Note that in our case the training of the VC model is done with half of the data as it is non-parallel. The corpus used is the UASpeech dataset (Kim et al., 2008). The task workflow is shown on the image below, where diamond shape refers to control speech (unimpaired), and square to dysarthric speech. Blue, red and orange refer to seen, unseen and augmented data respectively as well as the S, U and A letters.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3d_Thesis2021_MarcIlla/parallel_nonparallel.png?raw=true" width="650px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3d_Thesis2021_MarcIlla/parallel_nonparallel.png?raw=true" width="650px" align="center"/>
 </p>
 
 ### Conclusions
