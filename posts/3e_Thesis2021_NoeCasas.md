@@ -20,7 +20,7 @@ Nevertheless, linguistic knowledge can still play an important role in NMT syste
 Our first proposal in that line is presented in ([Casas et al, 2021](https://upcommons.upc.edu/bitstream/handle/2117/330835/2020nle_linguistic_vocabs.pdf)), where we define two novel ways of using purely linguistic vocabularies in a standard Transformer network. The first of our linguistic vocabulary definition strategies (“lemmatized vocabulary”) consists in having each word represented by two tokens: the first one is a “lemma token”, representing the lemma of the word, while the second token represents the morphological traits of the word (e.g. number, gender and case for German nouns). The second linguistic vocabulary strategy (“morphological unit vocabulary”) relies on a morphological subword segmentation, where each subword has associated morphological traits (e.g. the subword “s” being a number flexion for nouns in English). The use of linguistic tokens allows us to characterize the translations in terms of the linguistic input phenomena, while not losing the flexibility and desirable traits of statistic subword vocabularies.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3e_Thesis2021_NoeCasas/linguistic_vocabularies.png?raw=true" width="650px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3e_Thesis2021_NoeCasas/linguistic_vocabularies.png?raw=true" width="650px" align="center"/>
 </p>
 
 
@@ -29,7 +29,7 @@ Our first proposal in that line is presented in ([Casas et al, 2021](https://upc
 Our second proposal, from ([Casas et al, 2021](https://arxiv.org/abs/2102.08934)), is called Sparsely factored NMT, and consists of an evolution of the previously described linguistic vocabularies. The problem we try to solve here is sparsity in the linguistic information normally suffered in the traditional [Factored NMT](https://aclanthology.org/W16-2209/) approaches: when we represent a combination of morphological traits as a single token, it may not appear frequently in our training data, leading to poor training signal. Instead of using a different token for each combination of morphological traits, we decouple each different trait value (e.g. plural number, singular number, simple past tense, nominative case, etc) and, for each value, we have a different embedded vector. In order to represent a word, we add together the embedded vector of its lemma together with the vectors of each of the morphological traits of the specific surface form of the word. This reduces notably the sparsity of the training signal, as the individual values appear much frequently than each different combination of them.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3e_Thesis2021_NoeCasas/sparsely_factored_nmt.png?raw=true" width="650px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3e_Thesis2021_NoeCasas/sparsely_factored_nmt.png?raw=true" width="650px" align="center"/>
 </p>
 
 
@@ -39,7 +39,7 @@ Our third proposal, from ([Casas et al., 2020](https://aclanthology.org/2020.acl
 This approach allows maintaining the translation quality while providing a natural point to inject word-level linguistic information into our models without any subword mismatch.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3e_Thesis2021_NoeCasas/word_subword_transformers.png?raw=true" width="400px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3e_Thesis2021_NoeCasas/word_subword_transformers.png?raw=true" width="400px" align="center"/>
 </p>
 
 
@@ -48,11 +48,11 @@ This approach allows maintaining the translation quality while providing a natur
 Our final proposal, from ([Casas et al., 2020](https://aclanthology.org/2020.spnlp-1.1/)), aims at driving the text generation process with the syntactic structure of the sentence. For this, we train a Transformer model to generate iteratively the sentence dependency tree up to the terminal leaves representing words and subwords. At each decoding iteration, the model receives as input a sequence that can contain both terminal tokens (i.e. words or subwords) or “dependency tokens”, which represent branches of the sentence dependency tree still to generate, while as output it generates non-autoregressively two sequences of the same length as the input. The first output represents terminal tokens associated with the placeholders in the input; the second output contains “expansion placeholders”, which represent how the further branches of the tree should be expanded (e.g. the expansion placeholder `[HEAD-dobj]` represents that the word at that position (`HEAD`) has a direct object dependency to its right (`dobj`)). This iterative generation scheme allows for sentences to be generated according to their syntactic dependency structure, making it also possible to control the resulting style of the generation process by favoring some syntactic constructions; we illustrate this by making the generated text more descriptive by artificially increasing the probability of generating adjectival construction.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3e_Thesis2021_NoeCasas/iterative_expanson_lm_1.png?raw=true" width="400px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3e_Thesis2021_NoeCasas/iterative_expanson_lm_1.png?raw=true" width="400px" align="center"/>
 </p>
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mt-upc/blog/dev/assets/3e_Thesis2021_NoeCasas/iterative_expanson_lm_2.png?raw=true" width="650px" align="center"/>
+<img src="https://raw.githubusercontent.com/mt-upc/blog/main/assets/3e_Thesis2021_NoeCasas/iterative_expanson_lm_2.png?raw=true" width="650px" align="center"/>
 </p>
 
 
