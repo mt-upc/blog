@@ -3,6 +3,8 @@
 
 > This is the first post of a new post series where we will review the thesis presented by our students during the academic year 2020/21. Our goal is to share the research done by our students in their thesis, in a more accessible format, reaching a broader audience.
 
+*The complete thesis on which this post is based can be found [here](https://upcommons.upc.edu/handle/2117/354644).*
+
 Nowadays, the Artificial Intelligence industry has leveraged the power of computation along deep learning models to build cutting-edge applications. Some of these applications, such as personal assistants or chat-bots, heavily rely on **Knowledge Bases**. These databases aim to represent facts about specific domains and ways of reasoning about those facts to draw new conclusions or highlight inconsistencies.
 
 For example, imagine you are a tourist visiting Barcelona, and want to visit some well-known monuments in the city. You may probably wonder: *Which monuments should I visit in Barcelona?*, but the answer is simple, *ask Siri*.
